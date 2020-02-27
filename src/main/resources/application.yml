@@ -1,0 +1,12 @@
+sever:
+  port: 8080
+spring:
+  freemarker:
+    suffix: .html
+  datasource:
+    url: jdbc:mysql://localhost:3306/adminDB?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
