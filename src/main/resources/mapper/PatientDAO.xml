@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sl.boot.admindemo.dao.PatientDAO">
+    <resultMap id="BaseResultMap" type="com.sl.boot.admindemo.entity.Patient">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="patient_name" jdbcType="VARCHAR" property="patientName"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="disease" jdbcType="VARCHAR" property="disease"/>
+        <result column="age" jdbcType="VARCHAR" property="age"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="method" jdbcType="INTEGER" property="method"/>
+        <result column="belong_to_doctor_id" jdbcType="BIGINT" property="belongToDoctorId"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, patient_name, add_time, `password`, disease, age, gender, `method`, belong_to_doctor_id
+  </sql>
+    <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.PatientExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from patient
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from patient
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from patient
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.sl.boot.admindemo.entity.PatientExample">
+        delete from patient
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.sl.boot.admindemo.entity.Patient">
+    insert into patient (id, patient_name, add_time, 
+      `password`, disease, age, 
+      gender, `method`, belong_to_doctor_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{patientName,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{password,jdbcType=VARCHAR}, #{disease,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{method,jdbcType=INTEGER}, #{belongToDoctorId,jdbcType=BIGINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Patient">
+        insert into patient
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="patientName != null">
+                patient_name,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="disease != null">
+                disease,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="method != null">
+                `method`,
+            </if>
+            <if test="belongToDoctorId != null">
+                belong_to_doctor_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="patientName != null">
+                #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="disease != null">
+                #{disease,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                #{method,jdbcType=INTEGER},
+            </if>
+            <if test="belongToDoctorId != null">
+                #{belongToDoctorId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.sl.boot.admindemo.entity.PatientExample" resultType="java.lang.Long">
+        select count(*) from patient
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update patient
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.patientName != null">
+                patient_name = #{record.patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.addTime != null">
+                add_time = #{record.addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.password != null">
+                `password` = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.disease != null">
+                disease = #{record.disease,jdbcType=VARCHAR},
+            </if>
+            <if test="record.age != null">
+                age = #{record.age,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gender != null">
+                gender = #{record.gender,jdbcType=VARCHAR},
+            </if>
+            <if test="record.method != null">
+                `method` = #{record.method,jdbcType=INTEGER},
+            </if>
+            <if test="record.belongToDoctorId != null">
+                belong_to_doctor_id = #{record.belongToDoctorId,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update patient
+        set id = #{record.id,jdbcType=BIGINT},
+        patient_name = #{record.patientName,jdbcType=VARCHAR},
+        add_time = #{record.addTime,jdbcType=TIMESTAMP},
+        `password` = #{record.password,jdbcType=VARCHAR},
+        disease = #{record.disease,jdbcType=VARCHAR},
+        age = #{record.age,jdbcType=VARCHAR},
+        gender = #{record.gender,jdbcType=VARCHAR},
+        `method` = #{record.method,jdbcType=INTEGER},
+        belong_to_doctor_id = #{record.belongToDoctorId,jdbcType=BIGINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sl.boot.admindemo.entity.Patient">
+        update patient
+        <set>
+            <if test="patientName != null">
+                patient_name = #{patientName,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="disease != null">
+                disease = #{disease,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                `method` = #{method,jdbcType=INTEGER},
+            </if>
+            <if test="belongToDoctorId != null">
+                belong_to_doctor_id = #{belongToDoctorId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sl.boot.admindemo.entity.Patient">
+    update patient
+    set patient_name = #{patientName,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      `password` = #{password,jdbcType=VARCHAR},
+      disease = #{disease,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      `method` = #{method,jdbcType=INTEGER},
+      belong_to_doctor_id = #{belongToDoctorId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

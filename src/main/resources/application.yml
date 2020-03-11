@@ -4,7 +4,7 @@ spring:
   freemarker:
     suffix: .html
   datasource:
-    url: jdbc:mysql://localhost:3306/adminDB?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/mms_db?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -20,4 +20,10 @@ public class HomeController {
     public String index() {
         return "user/index";
     }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }
