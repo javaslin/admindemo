@@ -16,14 +16,15 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping("/user/index")
+    @RequestMapping("user/index")
     public String index() {
         return "user/index";
     }
 
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
+    @RequestMapping("drug/index")
+    public String drugindex() {
+        return "drug/index";
     }
+
 
 }

@@ -22,6 +22,7 @@ public class BaseResp<T> {
         super();
         this.code = 0;
         this.msg = "";
+        this.count = 0;
     }
 
     public BaseResp(T t) {

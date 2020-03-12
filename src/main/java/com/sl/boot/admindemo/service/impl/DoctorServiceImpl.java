@@ -12,4 +12,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private DoctorDAO doctorDAO;
+
+
 }

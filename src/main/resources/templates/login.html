@@ -28,6 +28,13 @@
             <input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password"
                    autocomplete="off">
         </div>
+        <label class="layui-form-label">单选框</label>
+        <div class="layui-input-block">
+            <input type="radio" name="role" value="管理员" title="管理员" checked="">
+            <input type="radio" name="role" value="药库管理员" title="药库管理员">
+            <input type="radio" name="role" value="医生" title="医生">
+            <input type="radio" name="role" value="病患" title="病患">
+        </div>
 
         <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
     </form>
