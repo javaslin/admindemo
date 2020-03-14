@@ -18,7 +18,14 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient queryOne(String patientName) {
-        return null;
+        PatientExample patientExample = new PatientExample();
+        patientExample.createCriteria().andPatientNameEqualTo(patientName);
+        List<Patient> patients = patientDAO.selectByExample(patientExample);
+        if (patients.size() != 0) {
+            Patient patient = patients.get(0);
+            return patient;
+        }
+        return new Patient();
     }
 
     @Override

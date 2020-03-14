@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>xx管理系统</title>
+    <title>医药管理系统</title>
     <link rel="stylesheet" href="css/layui.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">管理系统</div>
+        <div class="layui-logo">医药管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
 
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="javascript:;">
+                <a href="javascript:;" id="self">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
                     贤心
                 </a>
@@ -44,7 +44,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="">xxx</a></li>
-                <li class="layui-nav-item"><a href="">xxx</a></li>
+                <li class="layui-nav-item"><a href="">个人信息查看</a></li>
             </ul>
         </div>
     </div>
@@ -89,13 +89,10 @@
         </div>
     </div>
 
-    <div class="layui-footer">
-        <!-- 底部固定区域 -->
-        © layui.com - 底部固定区域
-    </div>
 </div>
 <script src="layui.js"></script>
 <script>
+    document.getElementById("self").innerHTML = window.sessionStorage.getItem("username")
     //JavaScript代码区域
     layui.use(['element', 'jquery'], function () {
         var element = layui.element;

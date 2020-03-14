@@ -28,19 +28,57 @@
             <input class="layui-input" name="password" placeholder="密码" lay-verify="required" type="password"
                    autocomplete="off">
         </div>
-        <label class="layui-form-label">单选框</label>
-        <div class="layui-input-block">
-            <input type="radio" name="role" value="管理员" title="管理员" checked="">
-            <input type="radio" name="role" value="药库管理员" title="药库管理员">
-            <input type="radio" name="role" value="医生" title="医生">
-            <input type="radio" name="role" value="病患" title="病患">
+        <div class="layui-form-item" pane="">
+            <!--            <label class="layui-form-label"></label>-->
+            <div class="layui-input-block">
+                <select name="role" lay-filter="role">
+                    <option value="0">医生</option>
+                    <option value="1" selected="">管理员</option>
+                    <option value="2">病患</option>
+                    <option value="3">药库管理员</option>
+                </select>
+            </div>
         </div>
-
-        <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
+        <button class="layui-btn" lay-submit lay-filter="loginS" type="button">登录</button>
     </form>
 </div>
+<script src="layui.js"></script>
+<script>
+    layui.use(['form', 'jquery'], function () {
+        var $ = layui.jquery
+        var form = layui.form;
+        //监听提交
+        form.on('submit(loginS)', function (data1) {
+            $.ajax({
+                type: "POST",
+                url: "/login",
+                data: JSON.stringify(data1.field),
+                contentType: "application/json",
+                error: function (request) {
+                    alert("连接错误")
+                },
+                success: function (data) {
+                    if (data.code == 200) {
+                        window.sessionStorage.setItem("username", data1.field.username)
+                        if (data.type == 1) {
+                            window.location.href = "/index";
+                        } else if (data.type == 2) {
+                            window.location.href = "/drugAdmin/drugAdminMain";
+                        } else if (data.type == 3) {
+                            window.location.href = "/doctor/doctorMain";
+                        } else if (data.type == 4) {
+                            window.location.href = "/patient/index";
+                        }
+                    }
+                    if (data.code == 404) {
+                        alert("用户名或密码错误");
+                    }
 
-<script type="text/javascript" src="layui.js"></script>
-<script type="text/javascript" src="login.js"></script>
+                }
+            })
+        });
+    });
+
+</script>
 </body>
 </html>

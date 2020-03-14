@@ -1,0 +1,64 @@
+<form class="layui-form" lay-filter="selfinfo">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block" style="width: 120px;">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="0" title="男">
+            <input type="radio" name="sex" value="1" title="女" checked>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">年龄</label>
+        <div class="layui-input-block" style="width: 120px;">
+            <input type="text" name="age" placeholder="请输入" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">患病</label>
+        <div class="layui-input-block" style="width: 120px;">
+            <input type="text" name="dis" placeholder="" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<script>
+    layui.use(['form', 'jquery'], function () {
+        var $ = layui.jquery
+        var form = layui.form;
+        $.ajax({
+            url: '/patient/getPatient' + '?username=' + window.sessionStorage.getItem("username"),
+            type: 'get',
+            cache: false,
+            dataType: 'json',//返回的数据类型
+            success: function (data) {
+                console.log(data.data.patientName)
+                form.val("selfinfo", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+                    "username": data.data.patientName // "name": "value"
+                    , "sex": data.data.gender
+                    , "age": data.data.age
+                    , "dis": data.data.disease
+                });
+
+            },
+            error: function () {
+                alert("error");
+            }
+        })
+
+
+    });
+</script>
