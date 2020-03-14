@@ -16,10 +16,6 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("/user/index")
-    public String index() {
-        return "user/index";
-    }
 
     @RequestMapping("/drug/index")
     public String drugindex() {
@@ -44,6 +40,16 @@ public class HomeController {
     @RequestMapping("/index")
     public String toindex() {
         return "index";
+    }
+
+    @RequestMapping("/logout")
+    public String logout() {
+        return "login";
+    }
+
+    @RequestMapping("/user/alluser")
+    public String alluser() {
+        return "user/alluser";
     }
 
 

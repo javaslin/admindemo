@@ -1,5 +1,6 @@
 package com.sl.boot.admindemo.service;
 
+import com.sl.boot.admindemo.dto.UserDTO;
 import com.sl.boot.admindemo.entity.AdminUser;
 import com.sl.boot.admindemo.entity.PwdUser;
 
@@ -12,7 +13,7 @@ public interface AdminUserService {
 
     Integer delUser(String userName, Integer type);
 
-    List<PwdUser> queryAllUser();
+    List<UserDTO> queryAllUser();
 
 
 }

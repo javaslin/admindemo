@@ -2,13 +2,16 @@ package com.sl.boot.admindemo.service.impl;
 
 
 import com.sl.boot.admindemo.dao.*;
+import com.sl.boot.admindemo.dto.UserDTO;
 import com.sl.boot.admindemo.entity.*;
 import com.sl.boot.admindemo.service.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
@@ -78,8 +81,25 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public List<PwdUser> queryAllUser() {
+    public List<UserDTO> queryAllUser() {
         PwdUserExample pwdUserExample = new PwdUserExample();
-        return pwdUserDAO.selectByExample(pwdUserExample);
+        List<UserDTO> userDTOs = new ArrayList<>();
+        userDTOs = pwdUserDAO.selectByExample(pwdUserExample).stream().map(m -> {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setId(m.getId());
+            userDTO.setPassword(m.getPassword());
+            userDTO.setUserName(m.getUserName());
+            if (m.getUserType() == 1) {
+                userDTO.setUserType("管理员");
+            } else if (m.getUserType() == 2) {
+                userDTO.setUserType("药库管理员");
+            } else if (m.getUserType() == 3) {
+                userDTO.setUserType("医生");
+            } else {
+                userDTO.setUserType("病患");
+            }
+            return userDTO;
+        }).collect(Collectors.toList());
+        return userDTOs;
     }
 }

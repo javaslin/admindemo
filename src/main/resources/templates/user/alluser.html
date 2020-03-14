@@ -1,0 +1,100 @@
+<div>
+    <table id="alluserTable" lay-filter="alluserTable">
+    </table>
+</div>
+<div class="site-text" style="margin: 5%; display: none" id="window">
+    <form class="layui-form" id="adduser" lay-filter="adduser">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" id="username" name="username" autocomplete="off" placeholder="请输入用户名"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入密码"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">帐号类型</label>
+            <div class="layui-input-block">
+                <input type="text" id="type" name="type" autocomplete="off" placeholder="1-管理员 2-药库管理员 3-医生 4-病患"
+                       class="layui-input">
+            </div>
+        </div>
+
+    </form>
+</div>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="adduser">添加用户</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#alluserTable'
+            , height: 600
+            , url: '/adminUser/all' //数据接口
+            , toolbar: '#toolbarDemo'
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                , {field: 'userName', title: '用户名', width: 240}
+                , {field: 'password', title: '密码', width: 240}
+                , {field: 'userType', title: '帐号类型', width: 240}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 240}
+            ]]
+        });
+        table.on('toolbar(alluserTable)', function (obj) {
+            if (obj.event === 'adduser') {
+                layer.open({
+                    type: 1
+                    , content: $("#window")
+                    , btn: '确定'
+                    , btnAlign: 'c' //按钮居中
+                    , area: ['500px', '500px']
+                    , shade: 0 //不显示遮罩
+                    , yes: function () {
+                        var data1 = form.val("adduser");
+                        var postdata = {"userName": data1.username, "passWord": data1.password, "type": data1.type}
+                        $.ajax({
+                            url: '/adminUser/addOne',
+                            type: 'post',
+                            contentType: "application/json",
+                            data: JSON.stringify(postdata),
+                            success: function (data) {
+                                table.render({
+                                    elem: '#alluserTable'
+                                    , height: 600
+                                    , url: '/adminUser/all' //数据接口
+                                    , toolbar: '#toolbarDemo'
+                                    , page: true //开启分页
+                                    , cols: [[ //表头
+                                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                                        , {field: 'userName', title: '用户名', width: 240}
+                                        , {field: 'password', title: '密码', width: 240}
+                                        , {field: 'userType', title: '帐号类型', width: 240}
+                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 240}
+                                    ]]
+                                });
+                            },
+                        })
+
+                        //data是默认值
+                        layer.closeAll();
+
+                    }
+                });
+            }
+        });
+
+    });
+</script>
