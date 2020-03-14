@@ -2,7 +2,48 @@
     <table id="drugTable" lay-filter="drugTable">
     </table>
 </div>
+<div class="site-text" style="margin: 5%; display: none" id="window1">
+    <form class="layui-form" id="adddrug" lay-filter="adddrug">
+        <div class="layui-form-item">
+            <label class="layui-form-label">药品名称</label>
+            <div class="layui-input-block">
+                <input type="text" id="drugName" name="drugName" autocomplete="off" placeholder="请输入药品名称"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">数量</label>
+            <div class="layui-input-block">
+                <input type="text" id="drugCount" name="drugCount" autocomplete="off" placeholder="请输入数量"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">生产厂家</label>
+            <div class="layui-input-block">
+                <input type="text" id="factory" name="factory" autocomplete="off" placeholder="请输入生产厂家"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">价格</label>
+            <div class="layui-input-block">
+                <input type="text" id="price" name="price" autocomplete="off" placeholder="请输入价格"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">功能主治</label>
+            <div class="layui-input-block">
+                <input type="text" id="drugFunction" name="drugFunction" autocomplete="off" placeholder="请简述功能"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">规格</label>
+            <div class="layui-input-block">
+                <input type="text" id="size" name="size" autocomplete="off" placeholder="请输入规格"
+                       class="layui-input">
+            </div>
+        </div>
 
+    </form>
+</div>
 <div class="site-text" style="margin: 5%; display: none" id="window">
     <form class="layui-form" id="amount" lay-filter="example">
         <div class="layui-form-item">
@@ -15,11 +56,16 @@
 
     </form>
 </div>
-
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="adddrug">添加药品</button>
+    </div>
+</script>
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="add">入库</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">出库</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 
 <script>
@@ -33,16 +79,16 @@
             , height: 600
             , url: '/drug/all' //数据接口
             , page: true //开启分页
+            , toolbar: '#toolbarDemo'
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
                 , {field: 'drugName', title: '药品名称', width: 140}
                 , {field: 'drugCount', title: '数量', width: 80}
                 , {field: 'factory', title: '生产厂家', width: 180}
-                , {field: 'price', title: '价格', width: 50}
-                , {field: 'productionTime', title: '生产日期', width: 120}
+                , {field: 'price', title: '价格（元）', width: 100}
                 , {field: 'drugFunction', title: '功能主治', width: 250}
                 , {field: 'size', title: '规格', width: 100}
-                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 130}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
             ]]
         });
 
@@ -51,11 +97,63 @@
         table.on('tool(drugTable)', function (obj) {
             var data = obj.data;
             //console.log(obj)
-            if (obj.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
+            if (obj.event === 'delete') {
+                var postdata = {"id": data.id}
+                layer.confirm('确定删除该药品吗', function (index) {
+                    $.ajax({
+                        url: '/drug/del',
+                        type: 'post',
+                        contentType: "application/json",
+                        data: JSON.stringify(postdata),
+                        success: function (data) {
+                            obj.del();
+                            layer.close(index);
+                        },
+                    })
                 });
+            } else if (obj.event === 'del') {
+                layer.open({
+                    type: 1
+                    , content: $("#window")
+                    , btn: '确定'
+                    , btnAlign: 'c' //按钮居中
+                    , shade: 0 //不显示遮罩
+                    , yes: function () {
+                        var data1 = form.val("example");
+                        console.log(data)
+                        var postdata = {"drugName": data.drugName, "amount": data1.amount}
+                        $.ajax({
+                            url: '/drug/desc',
+                            type: 'post',
+                            contentType: "application/json",
+                            data: JSON.stringify(postdata),
+                            success: function (data) {
+                                table.render({
+                                    elem: '#drugTable'
+                                    , height: 600
+                                    , url: '/drug/all' //数据接口
+                                    , page: true //开启分页
+                                    , toolbar: '#toolbarDemo'
+                                    , cols: [[ //表头
+                                        {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+                                        , {field: 'drugName', title: '药品名称', width: 140}
+                                        , {field: 'drugCount', title: '数量', width: 80}
+                                        , {field: 'factory', title: '生产厂家', width: 180}
+                                        , {field: 'price', title: '价格（元）', width: 100}
+                                        , {field: 'drugFunction', title: '功能主治', width: 250}
+                                        , {field: 'size', title: '规格', width: 100}
+                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+                                    ]]
+                                });
+                            },
+                        })
+
+                        //data是默认值
+                        layer.closeAll();
+
+                    }
+                });
+
             } else if (obj.event === 'add') {
                 // layer.prompt({
                 //     formType: 2
@@ -86,22 +184,79 @@
                                     elem: '#drugTable'
                                     , height: 600
                                     , url: '/drug/all' //数据接口
-                                    , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
-                                        title: '提示'
-                                        , layEvent: 'LAYTABLE_TIPS'
-                                        , icon: 'layui-icon-tips'
-                                    }]
                                     , page: true //开启分页
+                                    , toolbar: '#toolbarDemo'
                                     , cols: [[ //表头
                                         {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
                                         , {field: 'drugName', title: '药品名称', width: 140}
                                         , {field: 'drugCount', title: '数量', width: 80}
                                         , {field: 'factory', title: '生产厂家', width: 180}
-                                        , {field: 'price', title: '价格', width: 50}
-                                        , {field: 'productionTime', title: '生产日期', width: 120}
+                                        , {field: 'price', title: '价格（元）', width: 100}
                                         , {field: 'drugFunction', title: '功能主治', width: 250}
                                         , {field: 'size', title: '规格', width: 100}
-                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 130}
+                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+                                    ]]
+                                });
+                            },
+                        })
+
+                        //data是默认值
+                        layer.closeAll();
+
+                    }
+                });
+            }
+        });
+        table.on('toolbar(drugTable)', function (obj) {
+            if (obj.event === 'adddrug') {
+                layer.open({
+                    type: 1
+                    , content: $("#window1")
+                    , btn: '确定'
+                    , btnAlign: 'c' //按钮居中
+                    , area: ['500px', '500px']
+                    , shade: 0 //不显示遮罩
+                    , yes: function () {
+                        var data1 = form.val("adddrug");
+                        //     {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+                        // , {field: 'drugName', title: '药品名称', width: 140}
+                        // , {field: 'drugCount', title: '数量', width: 80}
+                        // , {field: 'factory', title: '生产厂家', width: 180}
+                        // , {field: 'price', title: '价格（元）', width: 60}
+                        // , {field: 'productionTime', title: '生产日期', width: 120}
+                        // , {field: 'drugFunction', title: '功能主治', width: 250}
+                        // , {field: 'size', title: '规格', width: 100}
+                        // , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 130}
+                        // ]]
+                        var postdata = {
+                            "drugName": data1.drugName,
+                            "drugCount": data1.drugCount,
+                            "factory": data1.factory,
+                            "price": data1.price,
+                            "drugFunction": data1.drugFunction,
+                            "size": data1.size
+                        }
+                        $.ajax({
+                            url: '/drug/add',
+                            type: 'post',
+                            contentType: "application/json",
+                            data: JSON.stringify(postdata),
+                            success: function (data) {
+                                table.render({
+                                    elem: '#drugTable'
+                                    , height: 600
+                                    , url: '/drug/all' //数据接口
+                                    , page: true //开启分页
+                                    , toolbar: '#toolbarDemo'
+                                    , cols: [[ //表头
+                                        {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+                                        , {field: 'drugName', title: '药品名称', width: 140}
+                                        , {field: 'drugCount', title: '数量', width: 80}
+                                        , {field: 'factory', title: '生产厂家', width: 180}
+                                        , {field: 'price', title: '价格（元）', width: 100}
+                                        , {field: 'drugFunction', title: '功能主治', width: 250}
+                                        , {field: 'size', title: '规格', width: 100}
+                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
                                     ]]
                                 });
                             },

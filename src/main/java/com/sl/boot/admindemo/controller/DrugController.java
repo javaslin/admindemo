@@ -8,6 +8,7 @@ import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -30,9 +31,9 @@ public class DrugController {
         return new BaseResp(drugs.size(), drugs);
     }
 
-    @DeleteMapping(value = "/del")
-    public BaseResp delOneDrug(@RequestParam("id") Long id) {
-        return new BaseResp(drugService.delOneDrug(id));
+    @PostMapping(value = "/del")
+    public BaseResp delOneDrug(@RequestBody HashMap<String, String> map) {
+        return new BaseResp(drugService.delOneDrug(Long.parseLong(map.get("id"))));
     }
 
     @PostMapping(value = "/incr")

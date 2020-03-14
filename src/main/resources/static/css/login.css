@@ -54,3 +54,9 @@ body {
 .login_btn {
     width: 100%;
 }
+
+.fff {
+    height: 260px;
+    width: 260px;
+    padding: 20px;
+}
