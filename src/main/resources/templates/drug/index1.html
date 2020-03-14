@@ -1,0 +1,31 @@
+<div>
+    <table id="drugTable" lay-filter="drugTable">
+    </table>
+</div>
+
+<script>
+
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#drugTable'
+            , height: 600
+            , url: '/drug/all' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+                , {field: 'drugName', title: '药品名称', width: 140}
+                , {field: 'drugCount', title: '数量', width: 80}
+                , {field: 'factory', title: '生产厂家', width: 240}
+                , {field: 'price', title: '价格（元）', width: 100}
+                , {field: 'drugFunction', title: '功能主治', width: 400}
+                , {field: 'size', title: '规格', width: 100}
+
+            ]]
+        });
+
+
+    });
+</script>

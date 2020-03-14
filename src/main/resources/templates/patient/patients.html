@@ -1,0 +1,25 @@
+<div>
+    <table id="patientTable" lay-filter="patientTable">
+    </table>
+</div>
+<script>
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#patientTable'
+            , height: 600
+            , url: '/patient/all' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                , {field: 'patientName', title: '患者用户名', width: 240}
+                , {field: 'age', title: '年龄', width: 150}
+                , {field: 'gender', title: '性别', width: 250}
+                , {field: 'addTime', title: '添加时间', width: 230}
+                , {field: 'disease', title: '患病', width: 180}
+            ]]
+        });
+    });
+</script>

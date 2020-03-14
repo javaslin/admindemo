@@ -22,6 +22,11 @@ public class HomeController {
         return "drug/index";
     }
 
+    @RequestMapping("/drug/index1")
+    public String drugindex1() {
+        return "drug/index1";
+    }
+
     @RequestMapping("/patient/selfinfo")
     public String patientinfo() {
         return "patient/selfinfo";
@@ -50,6 +55,21 @@ public class HomeController {
     @RequestMapping("/user/alluser")
     public String alluser() {
         return "user/alluser";
+    }
+
+    @RequestMapping("/drugadminuser/index")
+    public String drugadminuserindex() {
+        return "drugadminuser/index";
+    }
+
+    @RequestMapping("/patient/patients")
+    public String patients() {
+        return "patient/patients";
+    }
+
+    @RequestMapping("/doctor/index")
+    public String docindex() {
+        return "doctor/index";
     }
 
 

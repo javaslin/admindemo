@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>医药管理系统</title>
-    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="../css/layui.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -32,12 +32,11 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-
-            <li class="layui-nav-item" lay-filter="drugReport">
-                    <a class="" href="javascript:;" data-href="/drug/report">药品报表</a>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;" data-href="/drug/index">药品管理</a>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;" data-href="/user/alluser">帐号管理</a>
+                    <a class="" href="javascript:;" data-href="/patient/patients">查看病患信息</a>
                 </li>
             </ul>
         </div>
@@ -84,7 +83,7 @@
     </div>
 
 </div>
-<script src="layui.js"></script>
+<script src="../layui.js"></script>
 <script>
     document.getElementById("self").innerHTML = window.sessionStorage.getItem("username")
     //JavaScript代码区域
