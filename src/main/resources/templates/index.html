@@ -31,19 +31,13 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;" data-href="/drug/index">药品管理</a>
                 </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">其他管理</a>
-                    <dl class="layui-nav-child layui-bg-blue">
-                        <dd><a href="javascript:;">xxx</a></dd>
-                        <dd><a href="javascript:;">xxx</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
+                <li class="layui-nav-item" lay-filter="drugReport">
+                    <a class="" href="javascript:;" data-href="/drug/report">药品报表</a>
                 </li>
-                <li class="layui-nav-item"><a href="">xxx</a></li>
                 <li class="layui-nav-item"><a href="">个人信息查看</a></li>
             </ul>
         </div>
@@ -97,7 +91,6 @@
     layui.use(['element', 'jquery'], function () {
         var element = layui.element;
         var $ = layui.jquery;
-
         $("a").click(function () {
             var url = $(this).data("href");
             $("#content").load(url);

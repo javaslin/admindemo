@@ -1,0 +1,24 @@
+<div>
+    <table id="drugReportTable" lay-filter="drugReportTable">
+    </table>
+</div>
+<script>
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#drugReportTable'
+            , height: 600
+            , url: '/actionRecord/all' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                , {field: 'drugName', title: '药品名称', width: 240}
+                , {field: 'action', title: '操作', width: 180}
+                , {field: 'amount', title: '数量', width: 180}
+                , {field: 'actionTime', title: '时间', width: 250}
+            ]]
+        });
+    });
+</script>

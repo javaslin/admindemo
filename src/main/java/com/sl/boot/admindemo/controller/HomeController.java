@@ -36,6 +36,11 @@ public class HomeController {
         return "patient/index";
     }
 
+    @RequestMapping("/drug/report")
+    public String drugreport() {
+        return "drug/report";
+    }
+
     @RequestMapping("/index")
     public String toindex() {
         return "index";
