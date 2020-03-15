@@ -8,4 +8,10 @@ public interface ActionRecordService {
 
 
     List<ActionRecord> queryAllRecord();
+
+    List<ActionRecord> queryTodayRecord();
+
+    List<ActionRecord> queryMonthRecord();
+
+    List<ActionRecord> querySeasonRecord();
 }

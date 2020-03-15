@@ -2,6 +2,13 @@
     <table id="drugReportTable" lay-filter="drugReportTable">
     </table>
 </div>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="today">今日</button>
+        <button class="layui-btn layui-btn-sm" lay-event="month">这个月</button>
+        <button class="layui-btn layui-btn-sm" lay-event="season">这个季度</button>
+    </div>
+</script>
 <script>
     layui.use(['table', 'layer', 'jquery'], function () {
         var table = layui.table;
@@ -12,6 +19,7 @@
             , height: 600
             , url: '/actionRecord/all' //数据接口
             , page: true //开启分页
+            , toolbar: '#toolbarDemo'
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
                 , {field: 'drugName', title: '药品名称', width: 240}
@@ -19,6 +27,54 @@
                 , {field: 'amount', title: '数量', width: 180}
                 , {field: 'actionTime', title: '时间', width: 250}
             ]]
+        });
+        table.on('toolbar(drugReportTable)', function (obj) {
+            if (obj.event === 'today') {
+                table.render({
+                    elem: '#drugReportTable'
+                    , height: 600
+                    , url: '/actionRecord/today' //数据接口
+                    , page: true //开启分页
+                    , toolbar: '#toolbarDemo'
+                    , cols: [[ //表头
+                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                        , {field: 'drugName', title: '药品名称', width: 240}
+                        , {field: 'action', title: '操作', width: 180}
+                        , {field: 'amount', title: '数量', width: 180}
+                        , {field: 'actionTime', title: '时间', width: 250}
+                    ]]
+                });
+            } else if (obj.event === 'month') {
+                table.render({
+                    elem: '#drugReportTable'
+                    , height: 600
+                    , url: '/actionRecord/month' //数据接口
+                    , page: true //开启分页
+                    , toolbar: '#toolbarDemo'
+                    , cols: [[ //表头
+                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                        , {field: 'drugName', title: '药品名称', width: 240}
+                        , {field: 'action', title: '操作', width: 180}
+                        , {field: 'amount', title: '数量', width: 180}
+                        , {field: 'actionTime', title: '时间', width: 250}
+                    ]]
+                });
+            } else if (obj.event === 'season') {
+                table.render({
+                    elem: '#drugReportTable'
+                    , height: 600
+                    , url: '/actionRecord/season' //数据接口
+                    , page: true //开启分页
+                    , toolbar: '#toolbarDemo'
+                    , cols: [[ //表头
+                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                        , {field: 'drugName', title: '药品名称', width: 240}
+                        , {field: 'action', title: '操作', width: 180}
+                        , {field: 'amount', title: '数量', width: 180}
+                        , {field: 'actionTime', title: '时间', width: 250}
+                    ]]
+                });
+            }
         });
     });
 </script>

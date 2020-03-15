@@ -4,7 +4,9 @@
     <resultMap id="BaseResultMap" type="com.sl.boot.admindemo.entity.Prescription">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="belong_to_patient_name" jdbcType="VARCHAR" property="belongToPatientName"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -67,7 +69,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, description, `status`
+    id, description, `status`, create_time, belong_to_patient_name
   </sql>
     <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.PrescriptionExample"
             resultMap="BaseResultMap">
@@ -109,10 +111,10 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.sl.boot.admindemo.entity.Prescription">
-    insert into prescription (id, description, `status`
-      )
-    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
-      )
+    insert into prescription (id, description, `status`, 
+      create_time, belong_to_patient_name)
+    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{belongToPatientName,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Prescription">
         insert into prescription
@@ -126,6 +128,12 @@
             <if test="status != null">
                 `status`,
             </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="belongToPatientName != null">
+                belong_to_patient_name,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -135,7 +143,13 @@
                 #{description,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
-                #{status,jdbcType=INTEGER},
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=DATE},
+            </if>
+            <if test="belongToPatientName != null">
+                #{belongToPatientName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -156,7 +170,13 @@
                 description = #{record.description,jdbcType=VARCHAR},
             </if>
             <if test="record.status != null">
-                `status` = #{record.status,jdbcType=INTEGER},
+                `status` = #{record.status,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                create_time = #{record.createTime,jdbcType=DATE},
+            </if>
+            <if test="record.belongToPatientName != null">
+                belong_to_patient_name = #{record.belongToPatientName,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -167,7 +187,9 @@
         update prescription
         set id = #{record.id,jdbcType=INTEGER},
         description = #{record.description,jdbcType=VARCHAR},
-        `status` = #{record.status,jdbcType=INTEGER}
+        `status` = #{record.status,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=DATE},
+        belong_to_patient_name = #{record.belongToPatientName,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -179,7 +201,13 @@
                 description = #{description,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
-                `status` = #{status,jdbcType=INTEGER},
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=DATE},
+            </if>
+            <if test="belongToPatientName != null">
+                belong_to_patient_name = #{belongToPatientName,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -187,7 +215,9 @@
     <update id="updateByPrimaryKey" parameterType="com.sl.boot.admindemo.entity.Prescription">
     update prescription
     set description = #{description,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=INTEGER}
+      `status` = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      belong_to_patient_name = #{belongToPatientName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -26,4 +26,25 @@ public class ActionRecordController {
         return new BaseResp(count, actionRecords);
     }
 
+    @GetMapping(value = "/today")
+    public BaseResp getTodayRecord() {
+        List<ActionRecord> actionRecords = actionRecordService.queryTodayRecord();
+        int count = actionRecords.size();
+        return new BaseResp(count, actionRecords);
+    }
+
+    @GetMapping(value = "/month")
+    public BaseResp getMonthRecord() {
+        List<ActionRecord> actionRecords = actionRecordService.queryMonthRecord();
+        int count = actionRecords.size();
+        return new BaseResp(count, actionRecords);
+    }
+
+    @GetMapping(value = "/season")
+    public BaseResp getSeasonRecord() {
+        List<ActionRecord> actionRecords = actionRecordService.querySeasonRecord();
+        int count = actionRecords.size();
+        return new BaseResp(count, actionRecords);
+    }
+
 }

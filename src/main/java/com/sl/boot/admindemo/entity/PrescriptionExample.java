@@ -1,6 +1,8 @@
 package com.sl.boot.admindemo.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class PrescriptionExample {
@@ -122,6 +124,32 @@ public class PrescriptionExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -264,59 +292,198 @@ public class PrescriptionExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Integer value) {
+        public Criteria andStatusEqualTo(String value) {
             addCriterion("`status` =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Integer value) {
+        public Criteria andStatusNotEqualTo(String value) {
             addCriterion("`status` <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Integer value) {
+        public Criteria andStatusGreaterThan(String value) {
             addCriterion("`status` >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStatusGreaterThanOrEqualTo(String value) {
             addCriterion("`status` >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Integer value) {
+        public Criteria andStatusLessThan(String value) {
             addCriterion("`status` <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+        public Criteria andStatusLessThanOrEqualTo(String value) {
             addCriterion("`status` <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Integer> values) {
+        public Criteria andStatusLike(String value) {
+            addCriterion("`status` like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotLike(String value) {
+            addCriterion("`status` not like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<String> values) {
             addCriterion("`status` in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Integer> values) {
+        public Criteria andStatusNotIn(List<String> values) {
             addCriterion("`status` not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
+        public Criteria andStatusBetween(String value1, String value2) {
             addCriterion("`status` between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+        public Criteria andStatusNotBetween(String value1, String value2) {
             addCriterion("`status` not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterionForJDBCDate("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterionForJDBCDate("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterionForJDBCDate("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterionForJDBCDate("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterionForJDBCDate("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterionForJDBCDate("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameIsNull() {
+            addCriterion("belong_to_patient_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameIsNotNull() {
+            addCriterion("belong_to_patient_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameEqualTo(String value) {
+            addCriterion("belong_to_patient_name =", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameNotEqualTo(String value) {
+            addCriterion("belong_to_patient_name <>", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameGreaterThan(String value) {
+            addCriterion("belong_to_patient_name >", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameGreaterThanOrEqualTo(String value) {
+            addCriterion("belong_to_patient_name >=", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameLessThan(String value) {
+            addCriterion("belong_to_patient_name <", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameLessThanOrEqualTo(String value) {
+            addCriterion("belong_to_patient_name <=", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameLike(String value) {
+            addCriterion("belong_to_patient_name like", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameNotLike(String value) {
+            addCriterion("belong_to_patient_name not like", value, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameIn(List<String> values) {
+            addCriterion("belong_to_patient_name in", values, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameNotIn(List<String> values) {
+            addCriterion("belong_to_patient_name not in", values, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameBetween(String value1, String value2) {
+            addCriterion("belong_to_patient_name between", value1, value2, "belongToPatientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToPatientNameNotBetween(String value1, String value2) {
+            addCriterion("belong_to_patient_name not between", value1, value2, "belongToPatientName");
             return (Criteria) this;
         }
     }
 
     /**
-     *
      */
     public static class Criteria extends GeneratedCriteria {
 

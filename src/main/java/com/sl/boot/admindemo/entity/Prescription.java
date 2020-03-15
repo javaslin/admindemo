@@ -1,6 +1,7 @@
 package com.sl.boot.admindemo.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -19,7 +20,17 @@ public class Prescription implements Serializable {
     /**
      * 药方状态
      */
-    private Integer status;
+    private String status;
+
+    /**
+     * 创建日期
+     */
+    private Date createTime;
+
+    /**
+     * 属于哪个患者
+     */
+    private String belongToPatientName;
 
     private static final long serialVersionUID = 1L;
 }
