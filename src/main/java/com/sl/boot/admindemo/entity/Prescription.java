@@ -2,7 +2,6 @@ package com.sl.boot.admindemo.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import lombok.Data;
 
 /**
@@ -16,6 +15,11 @@ public class Prescription implements Serializable {
      * 药方说明
      */
     private String description;
+
+    /**
+     * 用法
+     */
+    private String usage;
 
     /**
      * 药方状态

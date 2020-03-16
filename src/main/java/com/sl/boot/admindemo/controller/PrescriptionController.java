@@ -1,13 +1,45 @@
 package com.sl.boot.admindemo.controller;
 
 
+import com.sl.boot.admindemo.entity.Prescription;
+import com.sl.boot.admindemo.service.PrescriptionService;
+import com.sl.boot.admindemo.vo.PrescriptionVo;
+import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/prescription")
 public class PrescriptionController {
+
+    @Autowired
+    private PrescriptionService prescriptionService;
+
+    @GetMapping("/allPre")
+    public BaseResp getAll() {
+        return new BaseResp(prescriptionService.queryAll());
+    }
+
+    @GetMapping("/patients")
+    public BaseResp getByPatientName(@RequestParam(value = "patientname") String patientName) {
+
+        return new BaseResp(prescriptionService.getByPname(patientName));
+    }
+
+    @PostMapping("/create")
+    public BaseResp createOne(@RequestBody Prescription prescription) {
+        return new BaseResp(prescriptionService.createOne(prescription));
+    }
+
+    @PostMapping("/update")
+    public BaseResp updateStatus(@RequestBody PrescriptionVo prescriptionVo) {
+        return new BaseResp(prescriptionService.updateStatus(prescriptionVo.getId(), prescriptionVo.getStauts()));
+    }
+
+    @PostMapping("/delete")
+    public BaseResp deletePre(@RequestBody PrescriptionVo prescriptionVo) {
+        return new BaseResp(prescriptionService.delOne(prescriptionVo.getId()));
+    }
 
 
 }

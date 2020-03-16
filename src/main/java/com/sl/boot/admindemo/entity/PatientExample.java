@@ -714,10 +714,79 @@ public class PatientExample {
             addCriterion("belong_to_doctor_id not between", value1, value2, "belongToDoctorId");
             return (Criteria) this;
         }
+
+        public Criteria andAnoNameIsNull() {
+            addCriterion("ano_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameIsNotNull() {
+            addCriterion("ano_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameEqualTo(String value) {
+            addCriterion("ano_name =", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameNotEqualTo(String value) {
+            addCriterion("ano_name <>", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameGreaterThan(String value) {
+            addCriterion("ano_name >", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameGreaterThanOrEqualTo(String value) {
+            addCriterion("ano_name >=", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameLessThan(String value) {
+            addCriterion("ano_name <", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameLessThanOrEqualTo(String value) {
+            addCriterion("ano_name <=", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameLike(String value) {
+            addCriterion("ano_name like", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameNotLike(String value) {
+            addCriterion("ano_name not like", value, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameIn(List<String> values) {
+            addCriterion("ano_name in", values, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameNotIn(List<String> values) {
+            addCriterion("ano_name not in", values, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameBetween(String value1, String value2) {
+            addCriterion("ano_name between", value1, value2, "anoName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnoNameNotBetween(String value1, String value2) {
+            addCriterion("ano_name not between", value1, value2, "anoName");
+            return (Criteria) this;
+        }
     }
 
     /**
-     *
      */
     public static class Criteria extends GeneratedCriteria {
 

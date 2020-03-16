@@ -72,5 +72,15 @@ public class HomeController {
         return "doctor/index";
     }
 
+    @RequestMapping("/prescription/all")
+    public String preAll() {
+        return "prescription/all";
+    }
+
+    @RequestMapping("/prescription/patientPresc")
+    public String pp() {
+        return "prescription/patientPresc";
+    }
+
 
 }

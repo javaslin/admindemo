@@ -101,7 +101,7 @@
                 var postdata = {"id": data.id}
                 layer.confirm('确定删除该药品吗', function (index) {
                     $.ajax({
-                        url: '/drug/del',
+                        url: '/drug/delete',
                         type: 'post',
                         contentType: "application/json",
                         data: JSON.stringify(postdata),

@@ -1,0 +1,33 @@
+<div>
+    <table id="prescTable" lay-filter="prescTable">
+    </table>
+</div>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="get">取药结算</a>
+</script>
+<script>
+
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#prescTable'
+            , height: 600
+            , url: '/prescription/patients?patientname=' + window.sessionStorage.getItem("username") //数据接口
+            , page: true //开启分页
+            , toolbar: '#toolbarDemo'
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                , {field: 'description', title: '药方药品', width: 240}
+                , {field: 'usage', title: '使用方法', width: 180}
+                , {field: 'status', title: '药方状态', width: 180}
+                , {field: 'belongToPatientName', title: '患者姓名', width: 250}
+                , {field: 'createTime', title: '创建时间', width: 250}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+            ]]
+        });
+
+
+    });
+</script>

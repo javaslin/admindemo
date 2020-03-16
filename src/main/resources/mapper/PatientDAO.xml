@@ -11,6 +11,7 @@
         <result column="gender" jdbcType="VARCHAR" property="gender"/>
         <result column="method" jdbcType="INTEGER" property="method"/>
         <result column="belong_to_doctor_id" jdbcType="BIGINT" property="belongToDoctorId"/>
+        <result column="ano_name" jdbcType="VARCHAR" property="anoName"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -73,7 +74,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, patient_name, add_time, `password`, disease, age, gender, `method`, belong_to_doctor_id
+    id, patient_name, add_time, `password`, disease, age, gender, `method`, belong_to_doctor_id, 
+    ano_name
   </sql>
     <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.PatientExample" resultMap="BaseResultMap">
         select
@@ -116,12 +118,12 @@
     <insert id="insert" parameterType="com.sl.boot.admindemo.entity.Patient">
     insert into patient (id, patient_name, add_time, 
       `password`, disease, age, 
-      gender, `method`, belong_to_doctor_id
-      )
+      gender, `method`, belong_to_doctor_id, 
+      ano_name)
     values (#{id,jdbcType=BIGINT}, #{patientName,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
       #{password,jdbcType=VARCHAR}, #{disease,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{method,jdbcType=INTEGER}, #{belongToDoctorId,jdbcType=BIGINT}
-      )
+      #{gender,jdbcType=VARCHAR}, #{method,jdbcType=INTEGER}, #{belongToDoctorId,jdbcType=BIGINT}, 
+      #{anoName,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Patient">
         insert into patient
@@ -153,6 +155,9 @@
             <if test="belongToDoctorId != null">
                 belong_to_doctor_id,
             </if>
+            <if test="anoName != null">
+                ano_name,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -181,6 +186,9 @@
             </if>
             <if test="belongToDoctorId != null">
                 #{belongToDoctorId,jdbcType=BIGINT},
+            </if>
+            <if test="anoName != null">
+                #{anoName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -220,6 +228,9 @@
             <if test="record.belongToDoctorId != null">
                 belong_to_doctor_id = #{record.belongToDoctorId,jdbcType=BIGINT},
             </if>
+            <if test="record.anoName != null">
+                ano_name = #{record.anoName,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -235,7 +246,8 @@
         age = #{record.age,jdbcType=VARCHAR},
         gender = #{record.gender,jdbcType=VARCHAR},
         `method` = #{record.method,jdbcType=INTEGER},
-        belong_to_doctor_id = #{record.belongToDoctorId,jdbcType=BIGINT}
+        belong_to_doctor_id = #{record.belongToDoctorId,jdbcType=BIGINT},
+        ano_name = #{record.anoName,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -267,6 +279,9 @@
             <if test="belongToDoctorId != null">
                 belong_to_doctor_id = #{belongToDoctorId,jdbcType=BIGINT},
             </if>
+            <if test="anoName != null">
+                ano_name = #{anoName,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -279,7 +294,8 @@
       age = #{age,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
       `method` = #{method,jdbcType=INTEGER},
-      belong_to_doctor_id = #{belongToDoctorId,jdbcType=BIGINT}
+      belong_to_doctor_id = #{belongToDoctorId,jdbcType=BIGINT},
+      ano_name = #{anoName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.sl.boot.admindemo.entity.Prescription">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="usage" jdbcType="VARCHAR" property="usage"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="create_time" jdbcType="DATE" property="createTime"/>
         <result column="belong_to_patient_name" jdbcType="VARCHAR" property="belongToPatientName"/>
@@ -69,7 +70,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, description, `status`, create_time, belong_to_patient_name
+    id, description, `usage`, `status`, create_time, belong_to_patient_name
   </sql>
     <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.PrescriptionExample"
             resultMap="BaseResultMap">
@@ -111,10 +112,12 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.sl.boot.admindemo.entity.Prescription">
-    insert into prescription (id, description, `status`, 
-      create_time, belong_to_patient_name)
-    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=DATE}, #{belongToPatientName,jdbcType=VARCHAR})
+    insert into prescription (id, description, `usage`, 
+      `status`, create_time, belong_to_patient_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{usage,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{belongToPatientName,jdbcType=VARCHAR}
+      )
   </insert>
     <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Prescription">
         insert into prescription
@@ -124,6 +127,9 @@
             </if>
             <if test="description != null">
                 description,
+            </if>
+            <if test="usage != null">
+                `usage`,
             </if>
             <if test="status != null">
                 `status`,
@@ -141,6 +147,9 @@
             </if>
             <if test="description != null">
                 #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="usage != null">
+                #{usage,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
@@ -169,6 +178,9 @@
             <if test="record.description != null">
                 description = #{record.description,jdbcType=VARCHAR},
             </if>
+            <if test="record.usage != null">
+                `usage` = #{record.usage,jdbcType=VARCHAR},
+            </if>
             <if test="record.status != null">
                 `status` = #{record.status,jdbcType=VARCHAR},
             </if>
@@ -187,6 +199,7 @@
         update prescription
         set id = #{record.id,jdbcType=INTEGER},
         description = #{record.description,jdbcType=VARCHAR},
+        `usage` = #{record.usage,jdbcType=VARCHAR},
         `status` = #{record.status,jdbcType=VARCHAR},
         create_time = #{record.createTime,jdbcType=DATE},
         belong_to_patient_name = #{record.belongToPatientName,jdbcType=VARCHAR}
@@ -199,6 +212,9 @@
         <set>
             <if test="description != null">
                 description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="usage != null">
+                `usage` = #{usage,jdbcType=VARCHAR},
             </if>
             <if test="status != null">
                 `status` = #{status,jdbcType=VARCHAR},
@@ -215,6 +231,7 @@
     <update id="updateByPrimaryKey" parameterType="com.sl.boot.admindemo.entity.Prescription">
     update prescription
     set description = #{description,jdbcType=VARCHAR},
+      `usage` = #{usage,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
       belong_to_patient_name = #{belongToPatientName,jdbcType=VARCHAR}

@@ -282,6 +282,76 @@ public class PrescriptionExample {
             return (Criteria) this;
         }
 
+        public Criteria andUsageIsNull() {
+            addCriterion("`usage` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageIsNotNull() {
+            addCriterion("`usage` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageEqualTo(String value) {
+            addCriterion("`usage` =", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageNotEqualTo(String value) {
+            addCriterion("`usage` <>", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageGreaterThan(String value) {
+            addCriterion("`usage` >", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageGreaterThanOrEqualTo(String value) {
+            addCriterion("`usage` >=", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageLessThan(String value) {
+            addCriterion("`usage` <", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageLessThanOrEqualTo(String value) {
+            addCriterion("`usage` <=", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageLike(String value) {
+            addCriterion("`usage` like", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageNotLike(String value) {
+            addCriterion("`usage` not like", value, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageIn(List<String> values) {
+            addCriterion("`usage` in", values, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageNotIn(List<String> values) {
+            addCriterion("`usage` not in", values, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageBetween(String value1, String value2) {
+            addCriterion("`usage` between", value1, value2, "usage");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsageNotBetween(String value1, String value2) {
+            addCriterion("`usage` not between", value1, value2, "usage");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("`status` is null");
             return (Criteria) this;

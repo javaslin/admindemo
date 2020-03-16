@@ -2,7 +2,6 @@ package com.sl.boot.admindemo.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import lombok.Data;
 
 /**
@@ -54,6 +53,11 @@ public class Patient implements Serializable {
      * 属于哪个医生
      */
     private Long belongToDoctorId;
+
+    /**
+     * 患者真实姓名
+     */
+    private String anoName;
 
     private static final long serialVersionUID = 1L;
 }
