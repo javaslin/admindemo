@@ -16,4 +16,6 @@ public interface PrescriptionService {
     List<Prescription> getByPname(String patientName);
 
     Integer delOne(Integer id);
+
+    Long settle(Integer id);
 }

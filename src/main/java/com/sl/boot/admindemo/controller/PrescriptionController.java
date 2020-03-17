@@ -41,5 +41,10 @@ public class PrescriptionController {
         return new BaseResp(prescriptionService.delOne(prescriptionVo.getId()));
     }
 
+    @PostMapping("/settle")
+    public BaseResp settle(@RequestBody PrescriptionVo prescriptionVo) {
+        return new BaseResp(prescriptionService.settle(prescriptionVo.getId()));
+    }
+
 
 }

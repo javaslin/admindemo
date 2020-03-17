@@ -82,5 +82,10 @@ public class HomeController {
         return "prescription/patientPresc";
     }
 
+    @RequestMapping("/drug/stastic")
+    public String sts() {
+        return "drug/stastic";
+    }
+
 
 }

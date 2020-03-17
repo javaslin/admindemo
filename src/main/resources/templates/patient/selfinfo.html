@@ -30,7 +30,7 @@
 
     <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
@@ -47,7 +47,7 @@
             success: function (data) {
                 console.log(data.data.patientName)
                 form.val("selfinfo", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
-                    "username": data.data.patientName // "name": "value"
+                    "username": data.data.anoName // "name": "value"
                     , "sex": data.data.gender
                     , "age": data.data.age
                     , "dis": data.data.disease

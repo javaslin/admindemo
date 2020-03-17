@@ -5,6 +5,7 @@ import com.sl.boot.admindemo.entity.Drug;
 import com.sl.boot.admindemo.service.DrugService;
 import com.sl.boot.admindemo.vo.DrugVo;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
+import com.sl.boot.admindemo.vo.resp.StaRep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,12 @@ public class DrugController {
     @PostMapping(value = "/desc")
     public BaseResp descAmount(@RequestBody DrugVo drugVo) {
         return new BaseResp(drugService.descrDrugAmount(drugVo.getDrugName(), drugVo.getAmount()));
+    }
+
+    @GetMapping(value = "/todayS")
+    public StaRep todayS() {
+        return drugService.todaySta();
+
     }
 
 }

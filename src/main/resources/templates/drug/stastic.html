@@ -1,0 +1,51 @@
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var $ = layui.jquery
+
+    $.ajax({
+        url: '/drug/todayS',
+        type: 'get',
+        contentType: "application/json",
+        success: function (data) {
+            var datax = data.dataX
+            var datay = data.dataY
+            var datay1 = data.dataY1
+            var option = {
+                title: {
+                    text: '今日药品出入库统计'
+                },
+                tooltip: {},
+                legend: {
+                    data: ['出库', '入库']
+                },
+                xAxis: {
+                    data: datax,
+                    type: 'category',
+                    "axisLabel": {
+                        interval: 0
+                    }
+
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '出库',
+                    type: 'bar',
+                    data: datay
+                }, {
+                    name: '入库',
+                    type: 'bar',
+                    data: datay1
+                }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option)
+        },
+    });
+    // 指定图表的配置项和数据
+</script>

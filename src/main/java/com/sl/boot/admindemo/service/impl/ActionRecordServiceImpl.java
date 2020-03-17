@@ -30,7 +30,7 @@ public class ActionRecordServiceImpl implements ActionRecordService {
     public List<ActionRecord> queryTodayRecord() {
         ActionRecordExample actionRecordExample = new ActionRecordExample();
         DateRange dateRange = DateUtils.getYesterdayRange();
-        actionRecordExample.createCriteria().andActionTimeGreaterThan(dateRange.getEnd());
+        actionRecordExample.createCriteria().andActionTimeGreaterThan(dateRange.getStart());
         return actionRecordDAO.selectByExample(actionRecordExample);
     }
 

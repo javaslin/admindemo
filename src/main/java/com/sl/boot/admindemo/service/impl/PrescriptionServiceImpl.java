@@ -1,12 +1,10 @@
 package com.sl.boot.admindemo.service.impl;
 
 
+import com.sl.boot.admindemo.dao.DrugDAO;
 import com.sl.boot.admindemo.dao.PatientDAO;
 import com.sl.boot.admindemo.dao.PrescriptionDAO;
-import com.sl.boot.admindemo.entity.Patient;
-import com.sl.boot.admindemo.entity.PatientExample;
-import com.sl.boot.admindemo.entity.Prescription;
-import com.sl.boot.admindemo.entity.PrescriptionExample;
+import com.sl.boot.admindemo.entity.*;
 import com.sl.boot.admindemo.service.PrescriptionService;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Autowired
     private PatientDAO patientDAO;
+
+    @Autowired
+    private DrugDAO drugDAO;
 
     @Override
     public List<Prescription> queryAll() {
@@ -61,5 +62,29 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public Integer delOne(Integer id) {
         return prescriptionDAO.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Long settle(Integer id) {
+        Prescription prescription = prescriptionDAO.selectByPrimaryKey(id);
+        String description = prescription.getDescription();
+        String[] drugs = description.split(",");
+        long total = 0;
+        for (int i = 0; i < drugs.length; i++) {
+            DrugExample drugExample = new DrugExample();
+            String[] drugAndCount = drugs[i].split("x");
+            drugExample.createCriteria().andDrugNameEqualTo(drugAndCount[0]);
+            List<Drug> drugs1 = drugDAO.selectByExample(drugExample);
+            if (drugs1.size() != 0) {
+                Drug drug = drugs1.get(0);
+                total += drug.getPrice() * Integer.parseInt(drugAndCount[1]);
+            }
+        }
+        Prescription prescription1 = new Prescription();
+        prescription1.setStatus("已取药");
+        PrescriptionExample prescriptionExample = new PrescriptionExample();
+        prescriptionExample.createCriteria().andIdEqualTo(id);
+        prescriptionDAO.updateByExampleSelective(prescription1, prescriptionExample);
+        return total;
     }
 }
