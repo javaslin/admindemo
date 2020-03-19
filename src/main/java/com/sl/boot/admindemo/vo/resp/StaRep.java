@@ -21,6 +21,8 @@ public class StaRep<T> {
 
     private T dataY1;
 
+    private T dataO;
+
 
     public StaRep() {
         super();

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>医药管理系统</title>
     <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="css/sts.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -37,7 +38,12 @@
                     <a class="" href="javascript:;" data-href="/drug/report">药品报表</a>
                 </li>
                 <li class="layui-nav-item" lay-filter="drugReport">
-                    <a class="" href="javascript:;" data-href="/drug/stastic">报表统计</a>
+                    <a class="" href="javascript:;">报表统计</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" data-href="/drug/stastic">今日统计</a></dd>
+                        <dd><a href="javascript:;" data-href="/drug/monthSta">月统计</a></dd>
+                        <dd><a href="javascript:;" data-href="/drug/quarterSta">季度统计</a></dd>
+                    </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;" data-href="/user/alluser">帐号管理</a>

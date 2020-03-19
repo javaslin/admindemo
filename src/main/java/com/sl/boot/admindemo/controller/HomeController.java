@@ -87,5 +87,15 @@ public class HomeController {
         return "drug/stastic";
     }
 
+    @RequestMapping("/drug/monthSta")
+    public String ms() {
+        return "drug/monthSta";
+    }
+
+    @RequestMapping("/drug/quarterSta")
+    public String qs() {
+        return "drug/quarterSta";
+    }
+
 
 }

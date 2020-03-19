@@ -20,4 +20,8 @@ public interface DrugService {
     Integer incrDrugAmount(String drugName, Integer amount);
 
     StaRep todaySta();
+
+    StaRep monthSta();
+
+    StaRep quarterSta();
 }

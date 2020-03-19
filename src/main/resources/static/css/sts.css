@@ -1,0 +1,28 @@
+.main1 {
+    float: right;
+}
+
+.main {
+    float: left;
+}
+
+.cl {
+    margin: 0 auto; /*水平居中*/
+    position: relative;
+    top: 50%; /*偏移*/
+    margin-top: +100px;
+}
+
+.cl1 {
+    margin: 0 auto; /*水平居中*/
+    position: relative;
+    top: 50%; /*偏移*/
+    margin-top: +100px;
+}
+
+.cl2 {
+    margin: 0 auto; /*水平居中*/
+    position: relative;
+    top: 50%; /*偏移*/
+    margin-top: +100px;
+}

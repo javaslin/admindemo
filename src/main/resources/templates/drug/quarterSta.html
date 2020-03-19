@@ -1,4 +1,4 @@
-<div class="cl">
+<div class="cl2">
     <div id="main" class="main" style="width: 500px;height:400px;"></div>
     <div id="main1" class="main1" style="width: 600px;height:400px;"></div>
 </div>
@@ -8,7 +8,7 @@
     var myChart1 = echarts.init(document.getElementById('main1'));
     var $ = layui.jquery
     $.ajax({
-        url: '/drug/todayS',
+        url: '/drug/quarterS',
         type: 'get',
         contentType: "application/json",
         success: function (data) {

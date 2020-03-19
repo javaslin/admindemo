@@ -53,4 +53,16 @@ public class DrugController {
 
     }
 
+    @GetMapping(value = "/monthS")
+    public StaRep monthS() {
+        return drugService.monthSta();
+
+    }
+
+    @GetMapping(value = "/quarterS")
+    public StaRep quarterS() {
+        return drugService.quarterSta();
+
+    }
+
 }
