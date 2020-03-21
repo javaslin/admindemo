@@ -1,2 +1,3 @@
 # admindemo
-##Spring boot+SpringMVC+Mybatis+MySQL+Layui+EasyCode 信息管理系统项目框架
+## Spring boot+SpringMVC+Mybatis+MySQL+Layui+EasyCode+Swagger+Echarts 
+## 医药管理系统

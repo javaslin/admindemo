@@ -30,7 +30,7 @@ public class LoginController {
         pwdUserExample.createCriteria().andUserNameEqualTo(loginVo.getUsername());
         List<PwdUser> pwdUsers = pwdUserDAO.selectByExample(pwdUserExample);
         if (pwdUsers.size() == 0) {
-            return new LoginResp(400, "用户不存在");
+            return new LoginResp(404, "用户名或密码错误");
         }
         PwdUser pwdUser = pwdUsers.get(0);
         if (loginVo.getPassword().equals(pwdUser.getPassword())) {

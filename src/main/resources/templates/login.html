@@ -62,12 +62,16 @@
                         window.sessionStorage.setItem("username", data1.field.username)
                         if (data.type == 1) {
                             window.location.href = "/index";
+                            alert("您的帐户类型为管理员");
                         } else if (data.type == 2) {
                             window.location.href = "/drugadminuser/index";
+                            alert("您的帐户类型为药库管理员");
                         } else if (data.type == 3) {
                             window.location.href = "/doctor/index";
+                            alert("您的帐户类型为医生");
                         } else if (data.type == 4) {
                             window.location.href = "/patient/index";
+                            alert("您的帐户类型为患者");
                         }
                     }
                     if (data.code == 404) {
