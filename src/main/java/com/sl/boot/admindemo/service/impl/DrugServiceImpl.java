@@ -143,7 +143,7 @@ public class DrugServiceImpl implements DrugService {
         List<Integer> amount1 = new ArrayList<>();
         DrugExample drugExample = new DrugExample();
         List<Drug> drugs1 = drugDAO.selectByExample(drugExample);
-        DateRange dateRange = DateUtils.getYesterdayRange();
+        DateRange dateRange = DateUtils.getMonthRange(new Date());
         Integer in = 0;
         Integer out = 0;
         for (Drug drug : drugs1) {

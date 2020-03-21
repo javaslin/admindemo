@@ -1,17 +1,18 @@
 package com.sl.boot.admindemo.service;
 
 import com.sl.boot.admindemo.entity.ActionRecord;
+import com.sl.boot.admindemo.vo.resp.BaseResp;
 
 import java.util.List;
 
 public interface ActionRecordService {
 
 
-    List<ActionRecord> queryAllRecord();
+    List<ActionRecord> queryAllRecord(Integer page, Integer limit, BaseResp baseResp);
 
-    List<ActionRecord> queryTodayRecord();
+    List<ActionRecord> queryTodayRecord(Integer page, Integer limit, BaseResp baseResp);
 
-    List<ActionRecord> queryMonthRecord();
+    List<ActionRecord> queryMonthRecord(Integer page, Integer limit, BaseResp baseResp);
 
-    List<ActionRecord> querySeasonRecord();
+    List<ActionRecord> querySeasonRecord(Integer page, Integer limit, BaseResp baseResp);
 }
