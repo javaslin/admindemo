@@ -2,15 +2,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label">姓名</label>
         <div class="layui-input-block" style="width: 120px;">
-            <input type="text" name="username" placeholder="请输入" autocomplete="off"
+            <input type="text" name="anoName" placeholder="请输入" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">性别</label>
         <div class="layui-input-block">
-            <input type="radio" name="sex" value="0" title="男">
-            <input type="radio" name="sex" value="1" title="女" checked>
+            <input type="radio" name="gender" value="0" title="男">
+            <input type="radio" name="gender" value="1" title="女" checked>
         </div>
     </div>
     <div class="layui-form-item">
@@ -23,7 +23,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">患病</label>
         <div class="layui-input-block" style="width: 120px;">
-            <input type="text" name="dis" placeholder="" autocomplete="off"
+            <input type="text" name="disease" placeholder="" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
@@ -35,8 +35,9 @@
         </div>
     </div>
 </form>
+
 <script>
-    layui.use(['form', 'jquery'], function () {
+    layui.use(['form', 'jquery', 'layer'], function () {
         var $ = layui.jquery
         var form = layui.form;
         $.ajax({
@@ -47,10 +48,10 @@
             success: function (data) {
                 console.log(data.data.patientName)
                 form.val("selfinfo", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
-                    "username": data.data.anoName // "name": "value"
-                    , "sex": data.data.gender
+                    "anoName": data.data.anoName // "name": "value"
+                    , "gender": data.data.gender
                     , "age": data.data.age
-                    , "dis": data.data.disease
+                    , "disease": data.data.disease
                 });
 
             },
@@ -58,6 +59,20 @@
                 alert("error");
             }
         })
+        form.on('submit(submit)', function (data1) {
+            $.ajax({
+                type: "POST",
+                url: "/patient/update",
+                data: JSON.stringify(data1.field),
+                contentType: "application/json",
+                error: function (request) {
+                    alert("连接错误")
+                },
+                success: function (data) {
+                    layer.confirm("提交成功！")
+                }
+            })
+        });
 
 
     });

@@ -10,4 +10,8 @@ public interface PatientService {
     Patient queryOne(String patientName);
 
     List<Patient> queryAllPatient(Integer page, Integer limit, BaseResp baseResp);
+
+    Integer updateOne(Patient patient);
+
+    Integer addOne(Patient patient);
 }

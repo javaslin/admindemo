@@ -5,10 +5,7 @@ import com.sl.boot.admindemo.entity.Patient;
 import com.sl.boot.admindemo.service.PatientService;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +31,16 @@ public class PatientController {
     public BaseResp getOnePatient(@RequestParam(value = "username") String username) {
 
         return new BaseResp(patientService.queryOne(username));
+    }
+
+    @PostMapping(value = "update")
+    public BaseResp update(@RequestBody Patient patient) {
+        return new BaseResp(patientService.updateOne(patient));
+    }
+
+    @PostMapping(value = "add")
+    public BaseResp add(@RequestBody Patient patient) {
+        return new BaseResp(patientService.addOne(patient));
     }
 
 }

@@ -11,6 +11,7 @@ import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,5 +39,19 @@ public class PatientServiceImpl implements PatientService {
         patientDAO.selectByExample(patientExample);
         baseResp.setCount((int) page1.getTotal());
         return page1.getResult();
+    }
+
+    @Override
+    public Integer updateOne(Patient patient) {
+        PatientExample patientExample = new PatientExample();
+        patientExample.createCriteria().andAnoNameEqualTo(patient.getAnoName());
+        patientDAO.updateByExampleSelective(patient, patientExample);
+        return null;
+    }
+
+    @Override
+    public Integer addOne(Patient patient) {
+        patient.setAddTime(new Date());
+        return patientDAO.insert(patient);
     }
 }
