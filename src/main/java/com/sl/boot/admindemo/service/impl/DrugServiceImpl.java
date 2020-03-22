@@ -1,6 +1,8 @@
 package com.sl.boot.admindemo.service.impl;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.sl.boot.admindemo.dao.ActionRecordDAO;
 import com.sl.boot.admindemo.dao.DrugDAO;
 import com.sl.boot.admindemo.entity.ActionRecord;
@@ -11,6 +13,7 @@ import com.sl.boot.admindemo.service.DrugService;
 import com.sl.boot.admindemo.tools.DateRange;
 import com.sl.boot.admindemo.tools.DateUtils;
 import com.sl.boot.admindemo.vo.StaVo;
+import com.sl.boot.admindemo.vo.resp.BaseResp;
 import com.sl.boot.admindemo.vo.resp.StaRep;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +31,12 @@ public class DrugServiceImpl implements DrugService {
     private ActionRecordDAO actionRecordDAO;
 
     @Override
-    public List<Drug> queryAllDrug() {
+    public List<Drug> queryAllDrug(Integer page, Integer limit, BaseResp baseResp) {
+        Page<Drug> page1 = PageHelper.startPage(page, limit);
         DrugExample drugExample = new DrugExample();
-        return drugDAO.selectByExample(drugExample);
+        drugDAO.selectByExample(drugExample);
+        baseResp.setCount((int) page1.getTotal());
+        return page1.getResult();
     }
 
     @Override

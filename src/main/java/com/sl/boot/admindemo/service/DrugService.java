@@ -9,7 +9,7 @@ import java.util.List;
 public interface DrugService {
 
 
-    List<Drug> queryAllDrug();
+    List<Drug> queryAllDrug(Integer page, Integer limit, BaseResp baseResp);
 
     Integer addOneDrug(Drug drug);
 

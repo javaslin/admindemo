@@ -1,10 +1,13 @@
 package com.sl.boot.admindemo.service.impl;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.sl.boot.admindemo.dao.PatientDAO;
 import com.sl.boot.admindemo.entity.Patient;
 import com.sl.boot.admindemo.entity.PatientExample;
 import com.sl.boot.admindemo.service.PatientService;
+import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +32,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<Patient> queryAllPatient() {
+    public List<Patient> queryAllPatient(Integer page, Integer limit, BaseResp baseResp) {
+        Page<Patient> page1 = PageHelper.startPage(page, limit);
         PatientExample patientExample = new PatientExample();
-        List<Patient> patients = patientDAO.selectByExample(patientExample);
-        return patients;
+        patientDAO.selectByExample(patientExample);
+        baseResp.setCount((int) page1.getTotal());
+        return page1.getResult();
     }
 }

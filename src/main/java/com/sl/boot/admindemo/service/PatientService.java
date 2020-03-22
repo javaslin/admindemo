@@ -1,6 +1,7 @@
 package com.sl.boot.admindemo.service;
 
 import com.sl.boot.admindemo.entity.Patient;
+import com.sl.boot.admindemo.vo.resp.BaseResp;
 
 import java.util.List;
 
@@ -8,5 +9,5 @@ public interface PatientService {
 
     Patient queryOne(String patientName);
 
-    List<Patient> queryAllPatient();
+    List<Patient> queryAllPatient(Integer page, Integer limit, BaseResp baseResp);
 }

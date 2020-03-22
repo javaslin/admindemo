@@ -1,6 +1,8 @@
 package com.sl.boot.admindemo.service.impl;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.sl.boot.admindemo.dao.DrugDAO;
 import com.sl.boot.admindemo.dao.PatientDAO;
 import com.sl.boot.admindemo.dao.PrescriptionDAO;
@@ -26,9 +28,12 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private DrugDAO drugDAO;
 
     @Override
-    public List<Prescription> queryAll() {
+    public List<Prescription> queryAll(Integer page, Integer limit, BaseResp baseResp) {
+        Page<Prescription> page1 = PageHelper.startPage(page, limit);
         PrescriptionExample prescriptionExample = new PrescriptionExample();
-        return prescriptionDAO.selectByExample(prescriptionExample);
+        prescriptionDAO.selectByExample(prescriptionExample);
+        baseResp.setCount((int) page1.getTotal());
+        return page1.getResult();
     }
 
     @Override

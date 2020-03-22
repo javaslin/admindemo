@@ -27,9 +27,11 @@ public class DrugController {
     }
 
     @GetMapping(value = "all")
-    public BaseResp getAllDrug() {
-        List<Drug> drugs = drugService.queryAllDrug();
-        return new BaseResp(drugs.size(), drugs);
+    public BaseResp getAllDrug(@RequestParam(value = "page") Integer page, @RequestParam(value = "limit") Integer limit) {
+        BaseResp baseResp = new BaseResp();
+        List<Drug> drugs = drugService.queryAllDrug(page, limit, baseResp);
+        baseResp.setData(drugs);
+        return baseResp;
     }
 
     @PostMapping(value = "/del")

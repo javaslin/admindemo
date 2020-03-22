@@ -1,10 +1,13 @@
 package com.sl.boot.admindemo.service.impl;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.sl.boot.admindemo.dao.*;
 import com.sl.boot.admindemo.dto.UserDTO;
 import com.sl.boot.admindemo.entity.*;
 import com.sl.boot.admindemo.service.AdminUserService;
+import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,10 +84,12 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public List<UserDTO> queryAllUser() {
+    public List<UserDTO> queryAllUser(Integer page, Integer limit, BaseResp baseResp) {
         PwdUserExample pwdUserExample = new PwdUserExample();
+        Page<PwdUser> page1 = PageHelper.startPage(page, limit);
+        pwdUserDAO.selectByExample(pwdUserExample);
         List<UserDTO> userDTOs = new ArrayList<>();
-        userDTOs = pwdUserDAO.selectByExample(pwdUserExample).stream().map(m -> {
+        userDTOs = page1.getResult().stream().map(m -> {
             UserDTO userDTO = new UserDTO();
             userDTO.setId(m.getId());
             userDTO.setPassword(m.getPassword());
@@ -100,6 +105,7 @@ public class AdminUserServiceImpl implements AdminUserService {
             }
             return userDTO;
         }).collect(Collectors.toList());
+        baseResp.setCount((int) page1.getTotal());
         return userDTOs;
     }
 }

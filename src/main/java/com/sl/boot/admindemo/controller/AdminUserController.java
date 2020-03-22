@@ -9,6 +9,8 @@ import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/adminUser")
 public class AdminUserController {
@@ -41,8 +43,11 @@ public class AdminUserController {
     }
 
     @GetMapping(value = "/all")
-    public BaseResp getAllUser() {
-        return new BaseResp(adminUserService.queryAllUser());
+    public BaseResp getAllUser(@RequestParam(value = "page") Integer page, @RequestParam(value = "limit") Integer limit) {
+        BaseResp baseResp = new BaseResp();
+        List<UserDTO> userDTOS = adminUserService.queryAllUser(page, limit, baseResp);
+        baseResp.setData(userDTOS);
+        return baseResp;
     }
 
 

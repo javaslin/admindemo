@@ -8,6 +8,8 @@ import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/prescription")
 public class PrescriptionController {
@@ -16,8 +18,11 @@ public class PrescriptionController {
     private PrescriptionService prescriptionService;
 
     @GetMapping("/allPre")
-    public BaseResp getAll() {
-        return new BaseResp(prescriptionService.queryAll());
+    public BaseResp getAll(@RequestParam(value = "page") Integer page, @RequestParam(value = "limit") Integer limit) {
+        BaseResp baseResp = new BaseResp();
+        List<Prescription> prescriptions = prescriptionService.queryAll(page, limit, baseResp);
+        baseResp.setData(prescriptions);
+        return baseResp;
     }
 
     @GetMapping("/patients")
