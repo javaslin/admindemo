@@ -4,8 +4,10 @@ package com.sl.boot.admindemo.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.sl.boot.admindemo.dao.PatientDAO;
+import com.sl.boot.admindemo.dao.PwdUserDAO;
 import com.sl.boot.admindemo.entity.Patient;
 import com.sl.boot.admindemo.entity.PatientExample;
+import com.sl.boot.admindemo.entity.PwdUser;
 import com.sl.boot.admindemo.service.PatientService;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     private PatientDAO patientDAO;
+
+    @Autowired
+    private PwdUserDAO pwdUserDAO;
 
     @Override
     public Patient queryOne(String patientName) {
@@ -51,6 +56,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Integer addOne(Patient patient) {
+        PwdUser pwdUser = new PwdUser();
+        pwdUser.setUserType(4);
+        pwdUser.setUserName(patient.getPatientName());
+        pwdUser.setPassword(patient.getPassword());
+        pwdUserDAO.insert(pwdUser);
         patient.setAddTime(new Date());
         return patientDAO.insert(patient);
     }
