@@ -42,11 +42,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public Integer updateStatus(Integer id, String status) {
+    public Integer update(Prescription prescription) {
         PrescriptionExample prescriptionExample = new PrescriptionExample();
-        prescriptionExample.createCriteria().andIdEqualTo(id);
-        Prescription prescription = new Prescription();
-        prescription.setStatus(status);
+        prescriptionExample.createCriteria().andIdEqualTo(prescription.getId());
         return prescriptionDAO.updateByExampleSelective(prescription, prescriptionExample);
     }
 

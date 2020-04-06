@@ -1,14 +1,16 @@
-package com.sl.boot.admindemo.entity;
+package com.sl.boot.admindemo.dto;
 
-import java.io.Serializable;
-import java.util.Date;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-/**
- * @author
- */
+import java.util.Date;
+
 @Data
-public class Patient implements Serializable {
+@ToString
+@EqualsAndHashCode
+public class PatientDTO {
     /**
      * 主键
      */
@@ -44,15 +46,6 @@ public class Patient implements Serializable {
      */
     private String gender;
 
-    /**
-     * 药方ID
-     */
-    private Integer method;
-
-    /**
-     * 属于哪个医生
-     */
-    private Long belongToDoctorId;
 
     /**
      * 患者真实姓名
@@ -69,5 +62,10 @@ public class Patient implements Serializable {
      */
     private String medicalId;
 
-    private static final long serialVersionUID = 1L;
+    private String description;
+    private String usage;
+
+    private Integer preId;
+
+    private String status;
 }

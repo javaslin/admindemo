@@ -9,6 +9,7 @@
     </div>
 </script>
 <script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="update">修改</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
 </script>
 <div class="site-text" style="margin: 5%; display: none" id="window1">
@@ -123,8 +124,62 @@
                         },
                     })
                 });
+            } else if (obj.event === 'update') {
+                form.val("addpresc", {
+                    "drugsName": data.description,
+                    "usage": data.usage,
+                    "patientName": data.belongToPatientName
+                });
+                layer.open({
+                    type: 1
+                    , content: $("#window1")
+                    , btn: '确定'
+                    , btnAlign: 'c' //按钮居中
+                    , area: ['500px', '500px']
+                    , shade: 0 //不显示遮罩
+                    , yes: function () {
+                        var data1 = form.val("addpresc");
+                        var postdata = {
+                            "id": data.id,
+                            "description": data1.drugsName,
+                            "usage": data1.usage,
+                            "belongToPatientName": data1.patientName
+                        }
+                        $.ajax({
+                            url: '/prescription/update',
+                            type: 'post',
+                            contentType: "application/json",
+                            data: JSON.stringify(postdata),
+                            success: function (data) {
+                                document.getElementById("addpresc").reset();
+                                table.render({
+                                    elem: '#prescriptionTable'
+                                    , height: 600
+                                    , url: '/prescription/allPre' //数据接口
+                                    , page: true //开启分页
+                                    , toolbar: '#toolbarDemo'
+                                    , cols: [[ //表头
+                                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                                        , {field: 'description', title: '药方药品', width: 240}
+                                        , {field: 'usage', title: '使用方法', width: 180}
+                                        , {field: 'status', title: '药方状态', width: 180}
+                                        , {field: 'belongToPatientName', title: '患者姓名', width: 250}
+                                        , {field: 'createTime', title: '创建时间', width: 250}
+                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+                                    ]]
+                                });
+                            },
+                        })
+
+                        //data是默认值
+                        layer.closeAll();
+
+                    }
+                });
+
             }
             ;
+
         });
     });
 </script>

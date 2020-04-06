@@ -32,10 +32,10 @@
             <!--            <label class="layui-form-label"></label>-->
             <div class="layui-input-block">
                 <select name="role" lay-filter="role" class="fff">
-                    <option value="0">医生</option>
+                    <option value="3">医生</option>
                     <option value="1" selected="">管理员</option>
-                    <option value="2">病患</option>
-                    <option value="3">药库管理员</option>
+                    <option value="4">病患</option>
+                    <option value="2">药房管理员</option>
                 </select>
             </div>
         </div>
@@ -76,6 +76,9 @@
                     }
                     if (data.code == 404) {
                         alert("用户名或密码错误");
+                    }
+                    if (data.code == 424) {
+                        alert("用户类型错误");
                     }
 
                 }

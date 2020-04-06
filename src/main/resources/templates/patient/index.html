@@ -45,6 +45,42 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;" id="content">
+            <form class="layui-form" lay-filter="selfinfo">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名</label>
+                    <div class="layui-input-block" style="width: 120px;">
+                        <input type="text" name="anoName" placeholder="请输入" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="gender" value="男" title="男">
+                        <input type="radio" name="gender" value="女" title="女" checked>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">年龄</label>
+                    <div class="layui-input-block" style="width: 120px;">
+                        <input type="text" name="age" placeholder="请输入" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">患病</label>
+                    <div class="layui-input-block" style="width: 120px;">
+                        <input type="text" name="disease" placeholder="" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+                    </div>
+                </div>
+            </form>
 
         </div>
     </div>
@@ -64,6 +100,45 @@
             $("#content").load(url);
 
         });
+
+    });
+    layui.use(['form', 'jquery', 'layer'], function () {
+        var $ = layui.jquery
+        var form = layui.form;
+        $.ajax({
+            url: '/patient/getPatient' + '?username=' + window.sessionStorage.getItem("username"),
+            type: 'get',
+            cache: false,
+            dataType: 'json',//返回的数据类型
+            success: function (data) {
+                console.log(data.data.patientName)
+                form.val("selfinfo", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+                    "anoName": data.data.anoName // "name": "value"
+                    , "gender": data.data.gender
+                    , "age": data.data.age
+                    , "disease": data.data.disease
+                });
+
+            },
+            error: function () {
+                alert("error");
+            }
+        })
+        form.on('submit(submit)', function (data1) {
+            $.ajax({
+                type: "POST",
+                url: "/patient/update",
+                data: JSON.stringify(data1.field),
+                contentType: "application/json",
+                error: function (request) {
+                    alert("连接错误")
+                },
+                success: function (data) {
+                    layer.confirm("提交成功！")
+                }
+            })
+        });
+
 
     });
 </script>

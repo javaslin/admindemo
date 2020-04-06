@@ -6,11 +6,13 @@ import com.sl.boot.admindemo.dto.UserDTO;
 import com.sl.boot.admindemo.service.AdminUserService;
 import com.sl.boot.admindemo.vo.UserVo;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/adminUser")
 public class AdminUserController {
@@ -23,6 +25,14 @@ public class AdminUserController {
     public BaseResp addOnerUser(@RequestBody UserVo userVo) {
         adminUserService.addOneUser(userVo.getUserName(), userVo.getPassWord(), userVo.getType());
         return new BaseResp();
+    }
+
+    @PostMapping(value = "/update")
+    public BaseResp updateUser(@RequestBody UserVo userVo) {
+        log.info(userVo.toString());
+        adminUserService.updateOne(userVo.getId(), userVo.getUserName(), userVo.getPassWord(), userVo.getType());
+        return new BaseResp();
+
     }
 
     @PostMapping(value = "/delOneUser")

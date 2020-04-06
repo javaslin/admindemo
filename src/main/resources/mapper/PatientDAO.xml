@@ -12,6 +12,8 @@
         <result column="method" jdbcType="INTEGER" property="method"/>
         <result column="belong_to_doctor_id" jdbcType="BIGINT" property="belongToDoctorId"/>
         <result column="ano_name" jdbcType="VARCHAR" property="anoName"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="medical_id" jdbcType="VARCHAR" property="medicalId"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -75,7 +77,7 @@
     </sql>
     <sql id="Base_Column_List">
     id, patient_name, add_time, `password`, disease, age, gender, `method`, belong_to_doctor_id, 
-    ano_name
+    ano_name, id_card, medical_id
   </sql>
     <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.PatientExample" resultMap="BaseResultMap">
         select
@@ -119,11 +121,13 @@
     insert into patient (id, patient_name, add_time, 
       `password`, disease, age, 
       gender, `method`, belong_to_doctor_id, 
-      ano_name)
+      ano_name, id_card, medical_id
+      )
     values (#{id,jdbcType=BIGINT}, #{patientName,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, 
       #{password,jdbcType=VARCHAR}, #{disease,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{method,jdbcType=INTEGER}, #{belongToDoctorId,jdbcType=BIGINT}, 
-      #{anoName,jdbcType=VARCHAR})
+      #{anoName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{medicalId,jdbcType=VARCHAR}
+      )
   </insert>
     <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Patient">
         insert into patient
@@ -158,6 +162,12 @@
             <if test="anoName != null">
                 ano_name,
             </if>
+            <if test="idCard != null">
+                id_card,
+            </if>
+            <if test="medicalId != null">
+                medical_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -189,6 +199,12 @@
             </if>
             <if test="anoName != null">
                 #{anoName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="medicalId != null">
+                #{medicalId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -231,6 +247,12 @@
             <if test="record.anoName != null">
                 ano_name = #{record.anoName,jdbcType=VARCHAR},
             </if>
+            <if test="record.idCard != null">
+                id_card = #{record.idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.medicalId != null">
+                medical_id = #{record.medicalId,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -247,7 +269,9 @@
         gender = #{record.gender,jdbcType=VARCHAR},
         `method` = #{record.method,jdbcType=INTEGER},
         belong_to_doctor_id = #{record.belongToDoctorId,jdbcType=BIGINT},
-        ano_name = #{record.anoName,jdbcType=VARCHAR}
+        ano_name = #{record.anoName,jdbcType=VARCHAR},
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+        medical_id = #{record.medicalId,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -282,6 +306,12 @@
             <if test="anoName != null">
                 ano_name = #{anoName,jdbcType=VARCHAR},
             </if>
+            <if test="idCard != null">
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="medicalId != null">
+                medical_id = #{medicalId,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -295,7 +325,9 @@
       gender = #{gender,jdbcType=VARCHAR},
       `method` = #{method,jdbcType=INTEGER},
       belong_to_doctor_id = #{belongToDoctorId,jdbcType=BIGINT},
-      ano_name = #{anoName,jdbcType=VARCHAR}
+      ano_name = #{anoName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      medical_id = #{medicalId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

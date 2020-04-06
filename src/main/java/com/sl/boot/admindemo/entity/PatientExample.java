@@ -784,6 +784,146 @@ public class PatientExample {
             addCriterion("ano_name not between", value1, value2, "anoName");
             return (Criteria) this;
         }
+
+        public Criteria andIdCardIsNull() {
+            addCriterion("id_card is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardIsNotNull() {
+            addCriterion("id_card is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardEqualTo(String value) {
+            addCriterion("id_card =", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNotEqualTo(String value) {
+            addCriterion("id_card <>", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardGreaterThan(String value) {
+            addCriterion("id_card >", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardGreaterThanOrEqualTo(String value) {
+            addCriterion("id_card >=", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardLessThan(String value) {
+            addCriterion("id_card <", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardLessThanOrEqualTo(String value) {
+            addCriterion("id_card <=", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardLike(String value) {
+            addCriterion("id_card like", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNotLike(String value) {
+            addCriterion("id_card not like", value, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardIn(List<String> values) {
+            addCriterion("id_card in", values, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNotIn(List<String> values) {
+            addCriterion("id_card not in", values, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardBetween(String value1, String value2) {
+            addCriterion("id_card between", value1, value2, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdCardNotBetween(String value1, String value2) {
+            addCriterion("id_card not between", value1, value2, "idCard");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdIsNull() {
+            addCriterion("medical_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdIsNotNull() {
+            addCriterion("medical_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdEqualTo(String value) {
+            addCriterion("medical_id =", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdNotEqualTo(String value) {
+            addCriterion("medical_id <>", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdGreaterThan(String value) {
+            addCriterion("medical_id >", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdGreaterThanOrEqualTo(String value) {
+            addCriterion("medical_id >=", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdLessThan(String value) {
+            addCriterion("medical_id <", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdLessThanOrEqualTo(String value) {
+            addCriterion("medical_id <=", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdLike(String value) {
+            addCriterion("medical_id like", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdNotLike(String value) {
+            addCriterion("medical_id not like", value, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdIn(List<String> values) {
+            addCriterion("medical_id in", values, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdNotIn(List<String> values) {
+            addCriterion("medical_id not in", values, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdBetween(String value1, String value2) {
+            addCriterion("medical_id between", value1, value2, "medicalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMedicalIdNotBetween(String value1, String value2) {
+            addCriterion("medical_id not between", value1, value2, "medicalId");
+            return (Criteria) this;
+        }
     }
 
     /**

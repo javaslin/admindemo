@@ -37,8 +37,8 @@ public class PrescriptionController {
     }
 
     @PostMapping("/update")
-    public BaseResp updateStatus(@RequestBody PrescriptionVo prescriptionVo) {
-        return new BaseResp(prescriptionService.updateStatus(prescriptionVo.getId(), prescriptionVo.getStauts()));
+    public BaseResp updateStatus(@RequestBody Prescription prescription) {
+        return new BaseResp(prescriptionService.update(prescription));
     }
 
     @PostMapping("/delete")

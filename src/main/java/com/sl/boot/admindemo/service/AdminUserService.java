@@ -16,5 +16,7 @@ public interface AdminUserService {
 
     List<UserDTO> queryAllUser(Integer page, Integer limit, BaseResp baseResp);
 
+    Integer updateOne(Integer id, String userName, String password, Integer type);
+
 
 }

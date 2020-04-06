@@ -97,7 +97,7 @@ public class AdminUserServiceImpl implements AdminUserService {
             if (m.getUserType() == 1) {
                 userDTO.setUserType("管理员");
             } else if (m.getUserType() == 2) {
-                userDTO.setUserType("药库管理员");
+                userDTO.setUserType("药房管理员");
             } else if (m.getUserType() == 3) {
                 userDTO.setUserType("医生");
             } else {
@@ -105,7 +105,61 @@ public class AdminUserServiceImpl implements AdminUserService {
             }
             return userDTO;
         }).collect(Collectors.toList());
+
+        for (int i = 0; i < userDTOs.size(); i++) {
+            UserDTO userDTO = userDTOs.get(i);
+            if (userDTO.getUserType().equals("管理员")) {
+                userDTOs.remove(i);
+            }
+        }
+
         baseResp.setCount((int) page1.getTotal());
         return userDTOs;
+    }
+
+    @Override
+    public Integer updateOne(Integer id, String userName, String password, Integer type) {
+        PwdUser pwdUser = pwdUserDAO.selectByPrimaryKey(id);
+        boolean isSuccess = false;
+        Integer a = 1;
+        if (type == 1) {
+            AdminUser adminUser = new AdminUser();
+            adminUser.setAddTime(new Date());
+            adminUser.setName(userName);
+            AdminUserExample adminUser1 = new AdminUserExample();
+            adminUser1.createCriteria().andNameEqualTo(pwdUser.getUserName());
+            a = adminUserDAO.updateByExampleSelective(adminUser, adminUser1);
+
+        } else if (type == 2) {
+            DrugAdminUser drugAdminUser = new DrugAdminUser();
+            drugAdminUser.setDrugAdminUsername(userName);
+            DrugAdminUserExample drugAdminUserExample = new DrugAdminUserExample();
+            drugAdminUserExample.createCriteria().andDrugAdminUsernameEqualTo(pwdUser.getUserName());
+            a = drugAdminUserDAO.updateByExampleSelective(drugAdminUser, drugAdminUserExample);
+        } else if (type == 3) {
+            Doctor doctor = new Doctor();
+            doctor.setDoctorname(userName);
+            DoctorExample doctorExample = new DoctorExample();
+            doctorExample.createCriteria().andAnoNameEqualTo(pwdUser.getUserName());
+            a = doctorDAO.updateByExampleSelective(doctor, doctorExample);
+        } else if (type == 4) {
+            Patient patient = new Patient();
+            patient.setPatientName(userName);
+            PatientExample patientExample = new PatientExample();
+            patientExample.createCriteria().andPatientNameEqualTo(pwdUser.getUserName());
+            a = patientDAO.updateByExampleSelective(patient, patientExample);
+
+        }
+        PwdUser pwdUser1 = new PwdUser();
+        pwdUser1.setPassword(password);
+        pwdUser1.setUserName(userName);
+        PwdUserExample pwdUserExample = new PwdUserExample();
+        pwdUserExample.createCriteria().andIdEqualTo(id);
+        Integer b = pwdUserDAO.updateByExampleSelective(pwdUser1, pwdUserExample);
+
+        if (a == 0 & b == 0) {
+            isSuccess = true;
+        }
+        return isSuccess ? 0 : 1;
     }
 }

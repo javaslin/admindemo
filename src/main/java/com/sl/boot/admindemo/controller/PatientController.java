@@ -1,6 +1,7 @@
 package com.sl.boot.admindemo.controller;
 
 
+import com.sl.boot.admindemo.dto.PatientDTO;
 import com.sl.boot.admindemo.entity.Patient;
 import com.sl.boot.admindemo.service.PatientService;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
@@ -22,7 +23,7 @@ public class PatientController {
     public BaseResp getAllPatient(@RequestParam(value = "page") Integer page, @RequestParam(value = "limit") Integer limit) {
 
         BaseResp baseResp = new BaseResp();
-        List<Patient> patients = patientService.queryAllPatient(page, limit, baseResp);
+        List<PatientDTO> patients = patientService.queryAllPatient(page, limit, baseResp);
         baseResp.setData(patients);
         return baseResp;
     }

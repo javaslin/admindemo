@@ -27,12 +27,16 @@ public class LoginController {
         LoginResp loginResp = new LoginResp();
 
         PwdUserExample pwdUserExample = new PwdUserExample();
-        pwdUserExample.createCriteria().andUserNameEqualTo(loginVo.getUsername());
+        pwdUserExample.createCriteria().andUserNameEqualTo(loginVo.getUsername()).andPasswordEqualTo(loginVo.getPassword());
         List<PwdUser> pwdUsers = pwdUserDAO.selectByExample(pwdUserExample);
         if (pwdUsers.size() == 0) {
             return new LoginResp(404, "用户名或密码错误");
         }
+
         PwdUser pwdUser = pwdUsers.get(0);
+        if (!loginVo.getRole().equals(pwdUser.getUserType().toString())) {
+            return new LoginResp(424, "用户名或密码错误");
+        }
         if (loginVo.getPassword().equals(pwdUser.getPassword())) {
             loginResp.setType(pwdUser.getUserType());
         }

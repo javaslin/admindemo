@@ -1,0 +1,111 @@
+<div>
+    <table id="patientTable1" lay-filter="patientTable1">
+    </table>
+</div>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="get">取药结算</a>
+</script>
+<div class="site-text" style="margin: 5%; display: none" id="window2">
+    <form class="layui-form" id="addpatient" lay-filter="addpatient">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" id="patientName" name="patientName" autocomplete="off" placeholder="请输入用户名   "
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入用户名   "
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">真实姓名</label>
+            <div class="layui-input-block">
+                <input type="text" id="anoName" name="anoName" autocomplete="off" placeholder="请输入真实姓名"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-block">
+                <input type="text" id="age" name="age" autocomplete="off" placeholder="请输入年龄"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="text" id="gender" name="gender" autocomplete="off" placeholder="请输入性别"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">患病</label>
+            <div class="layui-input-block">
+                <input type="text" id="disease" name="disease" autocomplete="off" placeholder="请输入患者的患病"
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#patientTable1'
+            , height: 600
+            , url: '/patient/all' //数据接口
+            , page: true //开启分页
+            , toolbar: '#toolbarDemo'
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                , {field: 'patientName', title: '患者用户名', width: 120}
+                , {field: 'anoName', title: '患者姓名', width: 120}
+                , {field: 'preId', title: '药方ID', width: 100}
+                , {field: 'description', title: '药方', width: 230}
+                , {field: 'status', title: '药方状态', width: 100}
+                , {field: 'usage', title: '使用方法', width: 230}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
+            ]]
+        });
+        table.on('tool(patientTable1)', function (obj) {
+            var data = obj.data;
+            //console.log(obj)
+            if (obj.event === 'get') {
+                var postdata = {"id": data.preId}
+                $.ajax({
+                    url: '/prescription/settle',
+                    type: 'post',
+                    contentType: "application/json",
+                    data: JSON.stringify(postdata),
+                    success: function (data) {
+                        layer.confirm('一共' + data.data + '元，已结算', function (index) {
+                            layer.close(index);
+                            table.render({
+                                elem: '#patientTable1'
+                                , height: 600
+                                , url: '/patient/all' //数据接口
+                                , page: true //开启分页
+                                , toolbar: '#toolbarDemo'
+                                , cols: [[ //表头
+                                    {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+                                    , {field: 'patientName', title: '患者用户名', width: 120}
+                                    , {field: 'anoName', title: '患者姓名', width: 120}
+                                    , {field: 'preId', title: '药方ID', width: 100}
+                                    , {field: 'description', title: '药方', width: 230}
+                                    , {field: 'status', title: '药方状态', width: 100}
+                                    , {field: 'usage', title: '使用方法', width: 230}
+                                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
+                                ]]
+                            });
+                        });
+                    },
+                })
+
+            }
+
+
+        });
+
+    })
+</script>

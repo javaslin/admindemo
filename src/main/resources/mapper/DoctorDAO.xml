@@ -5,6 +5,9 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="doctorName" jdbcType="VARCHAR" property="doctorname"/>
         <result column="InsertTime" jdbcType="TIMESTAMP" property="inserttime"/>
+        <result column="ano_name" jdbcType="VARCHAR" property="anoName"/>
+        <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
+        <result column="phone_num" jdbcType="VARCHAR" property="phoneNum"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -67,7 +70,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, doctorName, InsertTime
+    id, doctorName, InsertTime, ano_name, id_card, phone_num
   </sql>
     <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.DoctorExample" resultMap="BaseResultMap">
         select
@@ -108,9 +111,11 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.sl.boot.admindemo.entity.Doctor">
-    insert into doctor (id, doctorName, InsertTime
+    insert into doctor (id, doctorName, InsertTime, 
+      ano_name, id_card, phone_num
       )
-    values (#{id,jdbcType=INTEGER}, #{doctorname,jdbcType=VARCHAR}, #{inserttime,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=INTEGER}, #{doctorname,jdbcType=VARCHAR}, #{inserttime,jdbcType=TIMESTAMP}, 
+      #{anoName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Doctor">
@@ -125,6 +130,15 @@
             <if test="inserttime != null">
                 InsertTime,
             </if>
+            <if test="anoName != null">
+                ano_name,
+            </if>
+            <if test="idCard != null">
+                id_card,
+            </if>
+            <if test="phoneNum != null">
+                phone_num,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -135,6 +149,15 @@
             </if>
             <if test="inserttime != null">
                 #{inserttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="anoName != null">
+                #{anoName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                #{phoneNum,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -156,6 +179,15 @@
             <if test="record.inserttime != null">
                 InsertTime = #{record.inserttime,jdbcType=TIMESTAMP},
             </if>
+            <if test="record.anoName != null">
+                ano_name = #{record.anoName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.idCard != null">
+                id_card = #{record.idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phoneNum != null">
+                phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -165,7 +197,10 @@
         update doctor
         set id = #{record.id,jdbcType=INTEGER},
         doctorName = #{record.doctorname,jdbcType=VARCHAR},
-        InsertTime = #{record.inserttime,jdbcType=TIMESTAMP}
+        InsertTime = #{record.inserttime,jdbcType=TIMESTAMP},
+        ano_name = #{record.anoName,jdbcType=VARCHAR},
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -179,13 +214,25 @@
             <if test="inserttime != null">
                 InsertTime = #{inserttime,jdbcType=TIMESTAMP},
             </if>
+            <if test="anoName != null">
+                ano_name = #{anoName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                phone_num = #{phoneNum,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.sl.boot.admindemo.entity.Doctor">
     update doctor
     set doctorName = #{doctorname,jdbcType=VARCHAR},
-      InsertTime = #{inserttime,jdbcType=TIMESTAMP}
+      InsertTime = #{inserttime,jdbcType=TIMESTAMP},
+      ano_name = #{anoName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

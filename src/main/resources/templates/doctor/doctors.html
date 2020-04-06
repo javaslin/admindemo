@@ -1,0 +1,28 @@
+<div>
+    <table id="doctorTable" lay-filter="doctorTable">
+    </table>
+</div>
+
+<script>
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#doctorTable'
+            , height: 600
+            , url: '/doctor/all' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                , {field: 'doctorname', title: '医生用户名', width: 240}
+                , {field: 'anoName', title: '姓名', width: 150}
+                , {field: 'idCard', title: '身份证号码', width: 100}
+                , {field: 'phoneNum', title: '手机号码', width: 100}
+                , {field: 'inserttime', title: '添加时间', width: 230}
+
+            ]]
+        });
+
+    })
+</script>

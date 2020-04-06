@@ -1,5 +1,6 @@
 package com.sl.boot.admindemo.service;
 
+import com.sl.boot.admindemo.dto.PatientDTO;
 import com.sl.boot.admindemo.entity.Patient;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
 
@@ -9,7 +10,7 @@ public interface PatientService {
 
     Patient queryOne(String patientName);
 
-    List<Patient> queryAllPatient(Integer page, Integer limit, BaseResp baseResp);
+    List<PatientDTO> queryAllPatient(Integer page, Integer limit, BaseResp baseResp);
 
     Integer updateOne(Patient patient);
 

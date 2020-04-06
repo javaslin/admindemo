@@ -35,8 +35,14 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;" data-href="/drug/index">药品管理</a>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;" data-href="/patient/patients">查看病患信息</a>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;" data-href="/patient/patients1">药方结算</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;" data-href="/patient/patients">所有病患信息</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;" data-href="/doctor/doctors">所有医生信息</a>
                 </li>
             </ul>
         </div>
@@ -45,40 +51,8 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;" id="content">
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-                <legend>项目时间线</legend>
-            </fieldset>
-            <ul class="layui-timeline">
-                <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis"></i>
-                    <div class="layui-timeline-content layui-text">
-                        <h3 class="layui-timeline-title">2020年2月28日</h3>
-                        <ul>
-                            <li>添加数据表格</li>
-                            <li>开始写接口</li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis"></i>
-                    <div class="layui-timeline-content layui-text">
-                        <h3 class="layui-timeline-title">2020年2月27日</h3>
-                        <p>项目开始构建</p>
-                        <ul>
-                            <li>IDEA创建项目</li>
-                            <li>创建表，EasyCode生成代码</li>
-                            <li>添加Layui</li>
-                        </ul>
-                    </div>
-                </li>
 
-                <li class="layui-timeline-item">
-                    <i class="layui-icon layui-timeline-axis"></i>
-                    <div class="layui-timeline-content layui-text">
-                        <div class="layui-timeline-title">过去</div>
-                    </div>
-                </li>
-            </ul>
+
         </div>
     </div>
 
@@ -90,9 +64,11 @@
     layui.use(['element', 'jquery'], function () {
         var element = layui.element;
         var $ = layui.jquery;
+        $("#content").load("/drug/index");
         $("a").click(function () {
             var url = $(this).data("href");
             $("#content").load(url);
+            console.log(url)
 
         });
 

@@ -12,7 +12,7 @@ public interface PrescriptionService {
 
     Integer createOne(Prescription prescription);
 
-    Integer updateStatus(Integer id, String status);
+    Integer update(Prescription prescription);
 
     List<Prescription> getByPname(String patientName);
 
