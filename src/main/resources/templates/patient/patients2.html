@@ -1,0 +1,123 @@
+<div>
+    <table id="patientTable" lay-filter="patientTable">
+    </table>
+</div>
+
+<div class="site-text" style="margin: 5%; display: none" id="window2">
+    <form class="layui-form" id="addpatient" lay-filter="addpatient">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" id="patientName" name="patientName" autocomplete="off" placeholder="请输入用户名   "
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入用户名   "
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">真实姓名</label>
+            <div class="layui-input-block">
+                <input type="text" id="anoName" name="anoName" autocomplete="off" placeholder="请输入真实姓名"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-block">
+                <input type="text" id="age" name="age" autocomplete="off" placeholder="请输入年龄"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="text" id="gender" name="gender" autocomplete="off" placeholder="请输入性别"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">患病</label>
+            <div class="layui-input-block">
+                <input type="text" id="disease" name="disease" autocomplete="off" placeholder="请输入患者的患病"
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['table', 'layer', 'jquery'], function () {
+        var table = layui.table;
+        var $ = layui.jquery
+        var form = layui.form
+        table.render({
+            elem: '#patientTable'
+            , height: 600
+            , url: '/patient/all' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                , {field: 'patientName', title: '患者用户名', width: 140}
+                , {field: 'age', title: '年龄', width: 150}
+                , {field: 'gender', title: '性别', width: 100}
+                , {field: 'anoName', title: '患者姓名', width: 100}
+                , {field: 'idCard', title: '身份证号', width: 100}
+                , {field: 'medicalId', title: '医疗卡号', width: 100}
+                , {field: 'addTime', title: '添加时间', width: 200}
+                , {field: 'disease', title: '患病', width: 150}
+            ]]
+        });
+        table.on('toolbar(patientTable)', function (obj) {
+            //console.log(obj)
+            if (obj.event === 'addpatient1') {
+                layer.open({
+                    type: 1
+                    , content: $("#window2")
+                    , btn: '确定'
+                    , btnAlign: 'c' //按钮居中
+                    , area: ['500px', '500px']
+                    , shade: 0 //不显示遮罩
+                    , yes: function () {
+                        var data1 = form.val("addpatient");
+                        var postdata = {
+                            "patientName": data1.patientName,
+                            "anoName": data1.anoName,
+                            "gender": data1.gender,
+                            "age": data1.age,
+                            "disease": data1.disease,
+                            "password": data1.password
+                        }
+                        $.ajax({
+                            url: '/patient/add',
+                            type: 'post',
+                            contentType: "application/json",
+                            data: JSON.stringify(postdata),
+                            success: function (data) {
+                                table.render({
+                                    elem: '#patientTable'
+                                    , height: 600
+                                    , url: '/patient/all' //数据接口
+                                    , page: true //开启分页
+                                    , cols: [[ //表头
+                                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                                        , {field: 'patientName', title: '患者用户名', width: 140}
+                                        , {field: 'age', title: '年龄', width: 150}
+                                        , {field: 'gender', title: '性别', width: 100}
+                                        , {field: 'anoName', title: '患者姓名', width: 100}
+                                        , {field: 'idCard', title: '身份证号', width: 100}
+                                        , {field: 'medicalId', title: '医疗卡号', width: 100}
+                                        , {field: 'addTime', title: '添加时间', width: 200}
+                                        , {field: 'disease', title: '患病', width: 150}
+                                    ]]
+                                });
+                            },
+                        })
+
+                        //data是默认值
+                        layer.closeAll();
+
+                    }
+                });
+            }
+        });
+    })
+</script>

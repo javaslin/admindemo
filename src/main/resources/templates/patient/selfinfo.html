@@ -27,6 +27,20 @@
                    class="layui-input">
         </div>
     </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">身份证号</label>
+        <div class="layui-input-block" style="width: 120px;">
+            <input type="text" name="idCard" placeholder="" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">医疗卡号</label>
+        <div class="layui-input-block" style="width: 120px;">
+            <input type="text" name="medicalId" placeholder="" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
 
     <div class="layui-form-item" style="margin: 0px 0px 0px 100px;">
         <div class="layui-input-block">
@@ -51,6 +65,8 @@
                     , "gender": data.data.gender
                     , "age": data.data.age
                     , "disease": data.data.disease
+                    , "idCard": data.data.idCard
+                    , "medicalId": data.data.medicalId
                 });
 
             },

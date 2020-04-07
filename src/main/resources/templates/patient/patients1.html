@@ -58,12 +58,13 @@
             , page: true //开启分页
             , toolbar: '#toolbarDemo'
             , cols: [[ //表头
-                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
                 , {field: 'patientName', title: '患者用户名', width: 120}
-                , {field: 'anoName', title: '患者姓名', width: 120}
-                , {field: 'preId', title: '药方ID', width: 100}
-                , {field: 'description', title: '药方', width: 230}
+                , {field: 'anoName', title: '患者姓名', width: 120, sort: true}
+                , {field: 'preId', title: '药方ID', width: 80}
+                , {field: 'description', title: '药方', width: 180}
                 , {field: 'status', title: '药方状态', width: 100}
+                , {field: 'addTime', title: '时间', width: 100, sort: true}
                 , {field: 'usage', title: '使用方法', width: 230}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
             ]]
@@ -88,12 +89,13 @@
                                 , page: true //开启分页
                                 , toolbar: '#toolbarDemo'
                                 , cols: [[ //表头
-                                    {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+                                    {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
                                     , {field: 'patientName', title: '患者用户名', width: 120}
-                                    , {field: 'anoName', title: '患者姓名', width: 120}
-                                    , {field: 'preId', title: '药方ID', width: 100}
-                                    , {field: 'description', title: '药方', width: 230}
+                                    , {field: 'anoName', title: '患者姓名', width: 120, sort: true}
+                                    , {field: 'preId', title: '药方ID', width: 80}
+                                    , {field: 'description', title: '药方', width: 180}
                                     , {field: 'status', title: '药方状态', width: 100}
+                                    , {field: 'addTime', title: '时间', width: 100, sort: true}
                                     , {field: 'usage', title: '使用方法', width: 230}
                                     , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
                                 ]]

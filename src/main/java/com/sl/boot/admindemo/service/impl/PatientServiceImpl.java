@@ -13,6 +13,7 @@ import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,13 +45,14 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<PatientDTO> queryAllPatient(Integer page, Integer limit, BaseResp baseResp) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Page<Patient> page1 = PageHelper.startPage(page, limit);
         PatientExample patientExample = new PatientExample();
         patientDAO.selectByExample(patientExample);
         List<PatientDTO> patientDTOS = new ArrayList<>();
         patientDTOS = page1.getResult().stream().map(m -> {
             PatientDTO patientDTO = new PatientDTO();
-            patientDTO.setAddTime(m.getAddTime());
+            patientDTO.setAddTime(simpleDateFormat.format(m.getAddTime()));
             patientDTO.setAge(m.getAge());
             patientDTO.setAnoName(m.getAnoName());
             patientDTO.setDisease(m.getDisease());

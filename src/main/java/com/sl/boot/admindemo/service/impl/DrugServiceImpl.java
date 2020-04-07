@@ -127,13 +127,13 @@ public class DrugServiceImpl implements DrugService {
         }
         List<StaVo> staVos = new ArrayList<>();
         StaVo staVo = new StaVo();
-        staVo.setName("出库");
+        staVo.setName("入库");
         staVo.setValue(out);
         StaVo staVo1 = new StaVo();
-        staVo1.setName("入库");
+        staVo1.setName("出库");
         staVo1.setValue(in);
-        staVos.add(staVo1);
         staVos.add(staVo);
+        staVos.add(staVo1);
         StaRep staRep = new StaRep();
         staRep.setDataX(drugs);
         staRep.setDataY(amount);
@@ -175,13 +175,13 @@ public class DrugServiceImpl implements DrugService {
         }
         List<StaVo> staVos = new ArrayList<>();
         StaVo staVo = new StaVo();
-        staVo.setName("出库");
+        staVo.setName("入库");
         staVo.setValue(out);
         StaVo staVo1 = new StaVo();
-        staVo1.setName("入库");
+        staVo1.setName("出库");
         staVo1.setValue(in);
-        staVos.add(staVo1);
         staVos.add(staVo);
+        staVos.add(staVo1);
         StaRep staRep = new StaRep();
         staRep.setDataX(drugs);
         staRep.setDataY(amount);
@@ -223,13 +223,13 @@ public class DrugServiceImpl implements DrugService {
         }
         List<StaVo> staVos = new ArrayList<>();
         StaVo staVo = new StaVo();
-        staVo.setName("出库");
+        staVo.setName("入库");
         staVo.setValue(out);
         StaVo staVo1 = new StaVo();
-        staVo1.setName("入库");
+        staVo1.setName("出库");
         staVo1.setValue(in);
-        staVos.add(staVo1);
         staVos.add(staVo);
+        staVos.add(staVo1);
         StaRep staRep = new StaRep();
         staRep.setDataX(drugs);
         staRep.setDataY(amount);

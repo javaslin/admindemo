@@ -3,7 +3,7 @@
     </table>
 </div>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="get">删除记录</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除记录</a>
 </script>
 <script>
 
@@ -30,35 +30,52 @@
         table.on('tool(prescTable)', function (obj) {
             var data = obj.data;
             //console.log(obj)
-            if (obj.event === 'get') {
-                var postdata = {"id": data.id}
-                $.ajax({
-                    url: '/prescription/settle',
-                    type: 'post',
-                    contentType: "application/json",
-                    data: JSON.stringify(postdata),
-                    success: function (data) {
-                        layer.confirm('一共' + data.data + '元，已结算', function (index) {
-                            layer.close(index);
-                            table.render({
-                                elem: '#prescTable'
-                                , height: 600
-                                , url: '/prescription/patients?patientname=' + window.sessionStorage.getItem("username") //数据接口
-                                , page: true //开启分页
-                                , toolbar: '#toolbarDemo'
-                                , cols: [[ //表头
-                                    {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-                                    , {field: 'description', title: '药方药品', width: 240}
-                                    , {field: 'usage', title: '使用方法', width: 180}
-                                    , {field: 'status', title: '药方状态', width: 180}
-                                    , {field: 'belongToPatientName', title: '患者姓名', width: 250}
-                                    , {field: 'createTime', title: '创建时间', width: 250}
-                                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
-                                ]]
-                            });
-                        });
-                    },
-                })
+            // if (obj.event === 'get') {
+            //     var postdata = {"id": data.id}
+            //     $.ajax({
+            //         url: '/prescription/settle',
+            //         type: 'post',
+            //         contentType: "application/json",
+            //         data: JSON.stringify(postdata),
+            //         success: function (data) {
+            //             layer.confirm('一共' + data.data + '元，已结算', function (index) {
+            //                 layer.close(index);
+            //                 table.render({
+            //                     elem: '#prescTable'
+            //                     , height: 600
+            //                     , url: '/prescription/patients?patientname=' + window.sessionStorage.getItem("username") //数据接口
+            //                     , page: true //开启分页
+            //                     , toolbar: '#toolbarDemo'
+            //                     , cols: [[ //表头
+            //                         {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+            //                         , {field: 'description', title: '药方药品', width: 240}
+            //                         , {field: 'usage', title: '使用方法', width: 180}
+            //                         , {field: 'status', title: '药方状态', width: 180}
+            //                         , {field: 'belongToPatientName', title: '患者姓名', width: 250}
+            //                         , {field: 'createTime', title: '创建时间', width: 250}
+            //                         , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+            //                     ]]
+            //                 });
+            //             });
+            //         },
+            //     })
+            //
+            // }
+
+            if (obj.event === 'del') {
+                layer.confirm('真的删除改药方吗', function (index) {
+                    obj.del();
+                    var postdata = {"id": data.id}
+                    $.ajax({
+                        url: '/prescription/delete',
+                        type: 'post',
+                        contentType: "application/json",
+                        data: JSON.stringify(postdata),
+                        success: function (data) {
+                        }
+                    })
+                    layer.close(index);
+                });
 
             }
 

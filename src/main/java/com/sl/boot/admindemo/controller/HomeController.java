@@ -72,6 +72,13 @@ public class HomeController {
         return "patient/patients1";
     }
 
+
+    @RequestMapping("/patient/patients2")
+    public String patients2() {
+        return "patient/patients2";
+    }
+
+
     @RequestMapping("/doctor/index")
     public String docindex() {
         return "doctor/index";

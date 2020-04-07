@@ -24,7 +24,7 @@ public class PatientDTO {
     /**
      * 添加时间
      */
-    private Date addTime;
+    private String addTime;
 
     /**
      * 密码

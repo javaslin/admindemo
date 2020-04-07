@@ -3,6 +3,7 @@ package com.sl.boot.admindemo.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.sl.boot.admindemo.dao.ActionRecordDAO;
 import com.sl.boot.admindemo.dao.DrugDAO;
 import com.sl.boot.admindemo.dao.PatientDAO;
 import com.sl.boot.admindemo.dao.PrescriptionDAO;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,6 +28,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Autowired
     private DrugDAO drugDAO;
+    @Autowired
+    private ActionRecordDAO actionRecordDAO;
 
     @Override
     public List<Prescription> queryAll(Integer page, Integer limit, BaseResp baseResp) {
@@ -82,12 +86,28 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 Drug drug = drugs1.get(0);
                 total += drug.getPrice() * Integer.parseInt(drugAndCount[1]);
             }
+            Drug drug = new Drug();
+            DrugExample drugExample1 = new DrugExample();
+            drugExample.createCriteria().andDrugNameEqualTo(drugAndCount[0]);
+            List<Drug> drugs2 = drugDAO.selectByExample(drugExample1);
+            if (drugs2.size() != 0) {
+                Drug drug1 = drugs2.get(0);
+                drug.setDrugCount(drug1.getDrugCount() - Integer.parseInt(drugAndCount[1]));
+                ActionRecord actionRecord = new ActionRecord();
+                actionRecord.setAction("出库药品");
+                actionRecord.setDrugName(drugAndCount[0]);
+                actionRecord.setActionTime(new Date());
+                actionRecord.setAmount(Integer.parseInt(drugAndCount[1]));
+                actionRecordDAO.insert(actionRecord);
+                drugDAO.updateByExampleSelective(drug, drugExample1);
+            }
         }
         Prescription prescription1 = new Prescription();
         prescription1.setStatus("已取药");
         PrescriptionExample prescriptionExample = new PrescriptionExample();
         prescriptionExample.createCriteria().andIdEqualTo(id);
         prescriptionDAO.updateByExampleSelective(prescription1, prescriptionExample);
+
         return total;
     }
 }
