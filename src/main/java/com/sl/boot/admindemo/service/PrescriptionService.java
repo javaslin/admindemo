@@ -10,7 +10,7 @@ public interface PrescriptionService {
 
     List<Prescription> queryAll(Integer page, Integer limit, BaseResp baseResp);
 
-    Integer createOne(Prescription prescription);
+    Integer createOne(Prescription prescription, String doctorName);
 
     Integer update(Prescription prescription);
 
@@ -18,5 +18,5 @@ public interface PrescriptionService {
 
     Integer delOne(Integer id);
 
-    Long settle(Integer id);
+    Integer settle(Integer id);
 }

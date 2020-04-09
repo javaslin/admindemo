@@ -67,4 +67,10 @@ public class DrugController {
 
     }
 
+    @GetMapping(value = "/search")
+    public BaseResp search(@RequestParam(value = "drugName") String drugName) {
+        return new BaseResp(drugService.queryDrug(drugName));
+
+    }
+
 }

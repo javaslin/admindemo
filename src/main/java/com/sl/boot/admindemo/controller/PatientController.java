@@ -44,4 +44,9 @@ public class PatientController {
         return new BaseResp(patientService.addOne(patient));
     }
 
+    @GetMapping(value = "/search")
+    public BaseResp search(@RequestParam(value = "patientName") String patientName) {
+        return new BaseResp(patientService.search(patientName));
+    }
+
 }

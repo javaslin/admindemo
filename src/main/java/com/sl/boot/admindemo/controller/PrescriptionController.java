@@ -32,8 +32,8 @@ public class PrescriptionController {
     }
 
     @PostMapping("/create")
-    public BaseResp createOne(@RequestBody Prescription prescription) {
-        return new BaseResp(prescriptionService.createOne(prescription));
+    public BaseResp createOne(@RequestBody Prescription prescription, @RequestParam(value = "username") String username) {
+        return new BaseResp(prescriptionService.createOne(prescription, username));
     }
 
     @PostMapping("/update")

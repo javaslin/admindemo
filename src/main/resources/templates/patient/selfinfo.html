@@ -24,7 +24,7 @@
         <label class="layui-form-label">患病</label>
         <div class="layui-input-block" style="width: 120px;">
             <input type="text" name="disease" placeholder="" autocomplete="off"
-                   class="layui-input">
+                   class="layui-input" disabled>
         </div>
     </div>
     <div class="layui-form-item">
@@ -38,6 +38,13 @@
         <label class="layui-form-label">医疗卡号</label>
         <div class="layui-input-block" style="width: 120px;">
             <input type="text" name="medicalId" placeholder="" autocomplete="off"
+                   class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">患者类型</label>
+        <div class="layui-input-block" style="width: 120px;">
+            <input type="text" name="ptype" placeholder="" autocomplete="off"
                    class="layui-input">
         </div>
     </div>
@@ -67,6 +74,7 @@
                     , "disease": data.data.disease
                     , "idCard": data.data.idCard
                     , "medicalId": data.data.medicalId
+                    , "ptype": data.data.ptype
                 });
 
             },

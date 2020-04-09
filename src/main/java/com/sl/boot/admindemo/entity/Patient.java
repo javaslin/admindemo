@@ -69,5 +69,10 @@ public class Patient implements Serializable {
      */
     private String medicalId;
 
+    /**
+     * 住院或门诊
+     */
+    private String ptype;
+
     private static final long serialVersionUID = 1L;
 }

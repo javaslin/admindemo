@@ -8,6 +8,8 @@
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="create_time" jdbcType="DATE" property="createTime"/>
         <result column="belong_to_patient_name" jdbcType="VARCHAR" property="belongToPatientName"/>
+        <result column="belong_to_doctor_name" jdbcType="VARCHAR" property="belongToDoctorName"/>
+        <result column="did" jdbcType="INTEGER" property="did"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -70,7 +72,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, description, `usage`, `status`, create_time, belong_to_patient_name
+    id, description, `usage`, `status`, create_time, belong_to_patient_name, belong_to_doctor_name, 
+    did
   </sql>
     <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.PrescriptionExample"
             resultMap="BaseResultMap">
@@ -113,11 +116,11 @@
     </delete>
     <insert id="insert" parameterType="com.sl.boot.admindemo.entity.Prescription">
     insert into prescription (id, description, `usage`, 
-      `status`, create_time, belong_to_patient_name
-      )
+      `status`, create_time, belong_to_patient_name, 
+      belong_to_doctor_name, did)
     values (#{id,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{usage,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{belongToPatientName,jdbcType=VARCHAR}
-      )
+      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=DATE}, #{belongToPatientName,jdbcType=VARCHAR}, 
+      #{belongToDoctorName,jdbcType=VARCHAR}, #{did,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Prescription">
         insert into prescription
@@ -140,6 +143,12 @@
             <if test="belongToPatientName != null">
                 belong_to_patient_name,
             </if>
+            <if test="belongToDoctorName != null">
+                belong_to_doctor_name,
+            </if>
+            <if test="did != null">
+                did,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -159,6 +168,12 @@
             </if>
             <if test="belongToPatientName != null">
                 #{belongToPatientName,jdbcType=VARCHAR},
+            </if>
+            <if test="belongToDoctorName != null">
+                #{belongToDoctorName,jdbcType=VARCHAR},
+            </if>
+            <if test="did != null">
+                #{did,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -190,6 +205,12 @@
             <if test="record.belongToPatientName != null">
                 belong_to_patient_name = #{record.belongToPatientName,jdbcType=VARCHAR},
             </if>
+            <if test="record.belongToDoctorName != null">
+                belong_to_doctor_name = #{record.belongToDoctorName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.did != null">
+                did = #{record.did,jdbcType=INTEGER},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -202,7 +223,9 @@
         `usage` = #{record.usage,jdbcType=VARCHAR},
         `status` = #{record.status,jdbcType=VARCHAR},
         create_time = #{record.createTime,jdbcType=DATE},
-        belong_to_patient_name = #{record.belongToPatientName,jdbcType=VARCHAR}
+        belong_to_patient_name = #{record.belongToPatientName,jdbcType=VARCHAR},
+        belong_to_doctor_name = #{record.belongToDoctorName,jdbcType=VARCHAR},
+        did = #{record.did,jdbcType=INTEGER}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -225,6 +248,12 @@
             <if test="belongToPatientName != null">
                 belong_to_patient_name = #{belongToPatientName,jdbcType=VARCHAR},
             </if>
+            <if test="belongToDoctorName != null">
+                belong_to_doctor_name = #{belongToDoctorName,jdbcType=VARCHAR},
+            </if>
+            <if test="did != null">
+                did = #{did,jdbcType=INTEGER},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -234,7 +263,9 @@
       `usage` = #{usage,jdbcType=VARCHAR},
       `status` = #{status,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
-      belong_to_patient_name = #{belongToPatientName,jdbcType=VARCHAR}
+      belong_to_patient_name = #{belongToPatientName,jdbcType=VARCHAR},
+      belong_to_doctor_name = #{belongToDoctorName,jdbcType=VARCHAR},
+      did = #{did,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

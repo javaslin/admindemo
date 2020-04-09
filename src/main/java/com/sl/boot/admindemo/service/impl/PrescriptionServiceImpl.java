@@ -3,10 +3,7 @@ package com.sl.boot.admindemo.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.sl.boot.admindemo.dao.ActionRecordDAO;
-import com.sl.boot.admindemo.dao.DrugDAO;
-import com.sl.boot.admindemo.dao.PatientDAO;
-import com.sl.boot.admindemo.dao.PrescriptionDAO;
+import com.sl.boot.admindemo.dao.*;
 import com.sl.boot.admindemo.entity.*;
 import com.sl.boot.admindemo.service.PrescriptionService;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
@@ -31,6 +28,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Autowired
     private ActionRecordDAO actionRecordDAO;
 
+    @Autowired
+    private DoctorDAO doctorDAO;
+
     @Override
     public List<Prescription> queryAll(Integer page, Integer limit, BaseResp baseResp) {
         Page<Prescription> page1 = PageHelper.startPage(page, limit);
@@ -41,8 +41,50 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public Integer createOne(Prescription prescription) {
-        return prescriptionDAO.insert(prescription);
+    public Integer createOne(Prescription prescription, String doctorName) {
+        PatientExample patientExample = new PatientExample();
+        List<Patient> patients = patientDAO.selectByExample(patientExample);
+        DoctorExample doctorExample = new DoctorExample();
+        doctorExample.createCriteria().andDoctornameEqualTo(doctorName);
+        List<Doctor> doctors = doctorDAO.selectByExample(doctorExample);
+        if (doctors.size() != 0) {
+            Doctor doctor = doctors.get(0);
+            prescription.setBelongToDoctorName(doctor.getAnoName());
+            prescription.setDid(doctor.getId());
+        }
+        List<String> paNs = new ArrayList<>();
+        for (Patient p : patients) {
+            paNs.add(p.getAnoName());
+        }
+        String[] split = prescription.getDescription().split(",");
+        List<String> objects = new ArrayList<>();
+        boolean flag = false;
+        for (int i = 0; i < split.length; i++) {
+            objects.add(split[i].split("x")[0]);
+            if (Integer.parseInt(split[i].split("x")[1]) > 10) {
+                flag = true;
+            }
+        }
+        for (String s :
+                objects) {
+            System.out.println(s);
+        }
+        DrugExample drugExample = new DrugExample();
+        drugExample.createCriteria().andDrugNameIn(objects);
+        List<Drug> drugs = drugDAO.selectByExample(drugExample);
+        System.out.println("drugs Size" + drugs.size());
+        if (!paNs.contains(prescription.getBelongToPatientName())) {
+            return -1;
+        }
+        if (drugs.size() == 0) {
+            return -2;
+        }
+        if (flag) {
+            return -3;
+        } else {
+            return prescriptionDAO.insert(prescription);
+        }
+
     }
 
     @Override
@@ -72,7 +114,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public Long settle(Integer id) {
+    public Integer settle(Integer id) {
         Prescription prescription = prescriptionDAO.selectByPrimaryKey(id);
         String description = prescription.getDescription();
         String[] drugs = description.split(",");
@@ -92,14 +134,18 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             List<Drug> drugs2 = drugDAO.selectByExample(drugExample1);
             if (drugs2.size() != 0) {
                 Drug drug1 = drugs2.get(0);
-                drug.setDrugCount(drug1.getDrugCount() - Integer.parseInt(drugAndCount[1]));
+                Long count = drug1.getDrugCount() - Integer.parseInt(drugAndCount[1]);
+                if (count < 0) {
+                    return -1;
+                }
+                drug.setDrugCount(count);
                 ActionRecord actionRecord = new ActionRecord();
                 actionRecord.setAction("出库药品");
                 actionRecord.setDrugName(drugAndCount[0]);
                 actionRecord.setActionTime(new Date());
                 actionRecord.setAmount(Integer.parseInt(drugAndCount[1]));
                 actionRecordDAO.insert(actionRecord);
-                drugDAO.updateByExampleSelective(drug, drugExample1);
+                drugDAO.updateByExampleSelective(drug1, drugExample1);
             }
         }
         Prescription prescription1 = new Prescription();
@@ -107,7 +153,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         PrescriptionExample prescriptionExample = new PrescriptionExample();
         prescriptionExample.createCriteria().andIdEqualTo(id);
         prescriptionDAO.updateByExampleSelective(prescription1, prescriptionExample);
-
-        return total;
+        return Math.toIntExact(total);
     }
 }

@@ -36,5 +36,15 @@ public class Prescription implements Serializable {
      */
     private String belongToPatientName;
 
+    /**
+     * 开局药方的医生的姓名
+     */
+    private String belongToDoctorName;
+
+    /**
+     * 医生ID
+     */
+    private Integer did;
+
     private static final long serialVersionUID = 1L;
 }

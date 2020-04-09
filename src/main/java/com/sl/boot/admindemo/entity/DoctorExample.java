@@ -524,6 +524,146 @@ public class DoctorExample {
             addCriterion("phone_num not between", value1, value2, "phoneNum");
             return (Criteria) this;
         }
+
+        public Criteria andSectionIsNull() {
+            addCriterion("`section` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionIsNotNull() {
+            addCriterion("`section` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionEqualTo(String value) {
+            addCriterion("`section` =", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotEqualTo(String value) {
+            addCriterion("`section` <>", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionGreaterThan(String value) {
+            addCriterion("`section` >", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionGreaterThanOrEqualTo(String value) {
+            addCriterion("`section` >=", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionLessThan(String value) {
+            addCriterion("`section` <", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionLessThanOrEqualTo(String value) {
+            addCriterion("`section` <=", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionLike(String value) {
+            addCriterion("`section` like", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotLike(String value) {
+            addCriterion("`section` not like", value, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionIn(List<String> values) {
+            addCriterion("`section` in", values, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotIn(List<String> values) {
+            addCriterion("`section` not in", values, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionBetween(String value1, String value2) {
+            addCriterion("`section` between", value1, value2, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andSectionNotBetween(String value1, String value2) {
+            addCriterion("`section` not between", value1, value2, "section");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleIsNull() {
+            addCriterion("t_title is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleIsNotNull() {
+            addCriterion("t_title is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleEqualTo(String value) {
+            addCriterion("t_title =", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleNotEqualTo(String value) {
+            addCriterion("t_title <>", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleGreaterThan(String value) {
+            addCriterion("t_title >", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("t_title >=", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleLessThan(String value) {
+            addCriterion("t_title <", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleLessThanOrEqualTo(String value) {
+            addCriterion("t_title <=", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleLike(String value) {
+            addCriterion("t_title like", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleNotLike(String value) {
+            addCriterion("t_title not like", value, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleIn(List<String> values) {
+            addCriterion("t_title in", values, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleNotIn(List<String> values) {
+            addCriterion("t_title not in", values, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleBetween(String value1, String value2) {
+            addCriterion("t_title between", value1, value2, "tTitle");
+            return (Criteria) this;
+        }
+
+        public Criteria andTTitleNotBetween(String value1, String value2) {
+            addCriterion("t_title not between", value1, value2, "tTitle");
+            return (Criteria) this;
+        }
     }
 
     /**

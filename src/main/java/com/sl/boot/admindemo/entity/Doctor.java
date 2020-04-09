@@ -30,5 +30,15 @@ public class Doctor implements Serializable {
      */
     private String phoneNum;
 
+    /**
+     * 科室
+     */
+    private String section;
+
+    /**
+     * 职称
+     */
+    private String tTitle;
+
     private static final long serialVersionUID = 1L;
 }

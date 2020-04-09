@@ -551,6 +551,136 @@ public class PrescriptionExample {
             addCriterion("belong_to_patient_name not between", value1, value2, "belongToPatientName");
             return (Criteria) this;
         }
+
+        public Criteria andBelongToDoctorNameIsNull() {
+            addCriterion("belong_to_doctor_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameIsNotNull() {
+            addCriterion("belong_to_doctor_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameEqualTo(String value) {
+            addCriterion("belong_to_doctor_name =", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameNotEqualTo(String value) {
+            addCriterion("belong_to_doctor_name <>", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameGreaterThan(String value) {
+            addCriterion("belong_to_doctor_name >", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameGreaterThanOrEqualTo(String value) {
+            addCriterion("belong_to_doctor_name >=", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameLessThan(String value) {
+            addCriterion("belong_to_doctor_name <", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameLessThanOrEqualTo(String value) {
+            addCriterion("belong_to_doctor_name <=", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameLike(String value) {
+            addCriterion("belong_to_doctor_name like", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameNotLike(String value) {
+            addCriterion("belong_to_doctor_name not like", value, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameIn(List<String> values) {
+            addCriterion("belong_to_doctor_name in", values, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameNotIn(List<String> values) {
+            addCriterion("belong_to_doctor_name not in", values, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameBetween(String value1, String value2) {
+            addCriterion("belong_to_doctor_name between", value1, value2, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andBelongToDoctorNameNotBetween(String value1, String value2) {
+            addCriterion("belong_to_doctor_name not between", value1, value2, "belongToDoctorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidIsNull() {
+            addCriterion("did is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidIsNotNull() {
+            addCriterion("did is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidEqualTo(Integer value) {
+            addCriterion("did =", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotEqualTo(Integer value) {
+            addCriterion("did <>", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidGreaterThan(Integer value) {
+            addCriterion("did >", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("did >=", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidLessThan(Integer value) {
+            addCriterion("did <", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidLessThanOrEqualTo(Integer value) {
+            addCriterion("did <=", value, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidIn(List<Integer> values) {
+            addCriterion("did in", values, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotIn(List<Integer> values) {
+            addCriterion("did not in", values, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidBetween(Integer value1, Integer value2) {
+            addCriterion("did between", value1, value2, "did");
+            return (Criteria) this;
+        }
+
+        public Criteria andDidNotBetween(Integer value1, Integer value2) {
+            addCriterion("did not between", value1, value2, "did");
+            return (Criteria) this;
+        }
     }
 
     /**

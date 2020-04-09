@@ -114,17 +114,17 @@
                 });
             }
         });
-        table.on('tool(alluserTable)', function (obj) {
-            var data = obj.data;
-            //console.log(obj)
-            if (obj.event === 'del') {
-                layer.confirm('真的删除用户吗', function (index) {
-                    obj.del();
-                    var postdata = {"userName": data.userName, "userType": data.userType}
-                    $.ajax({
-                        url: '/adminUser/delOneUser',
-                        type: 'post',
-                        contentType: "application/json",
+            table.on('tool(alluserTable)', function (obj) {
+                var data = obj.data;
+                //console.log(obj)
+                if (obj.event === 'del') {
+                    layer.confirm('真的删除用户吗', function (index) {
+                        obj.del();
+                        var postdata = {"userName": data.userName, "userType": data.userType}
+                        $.ajax({
+                            url: '/adminUser/delOneUser',
+                            type: 'post',
+                            contentType: "application/json",
                         data: JSON.stringify(postdata),
                         success: function (data) {
 

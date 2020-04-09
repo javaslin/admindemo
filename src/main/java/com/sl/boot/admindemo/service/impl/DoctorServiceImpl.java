@@ -30,4 +30,15 @@ public class DoctorServiceImpl implements DoctorService {
         baseResp.setCount((int) page1.getTotal());
         return page1.getResult();
     }
+
+    @Override
+    public Integer update(Doctor doctor) {
+        Doctor doctor1 = new Doctor();
+        doctor1.setAnoName(doctor.getAnoName());
+        doctor1.setIdCard(doctor.getIdCard());
+        doctor1.setPhoneNum(doctor.getPhoneNum());
+        DoctorExample doctorExample = new DoctorExample();
+        doctorExample.createCriteria().andIdEqualTo(doctor.getId());
+        return doctorDAO.updateByExampleSelective(doctor1, doctorExample);
+    }
 }

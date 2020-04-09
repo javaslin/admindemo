@@ -50,17 +50,19 @@
             , page: true //开启分页
             , toolbar: '#toolbarDemo'
             , cols: [[ //表头
-                {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-                , {field: 'description', title: '药方药品', width: 240}
+                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                , {field: 'description', title: '药方药品', width: 180}
                 , {field: 'usage', title: '使用方法', width: 180}
-                , {field: 'status', title: '药方状态', width: 180}
-                , {field: 'belongToPatientName', title: '患者姓名', width: 250}
-                , {field: 'createTime', title: '创建时间', width: 250}
-                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+                , {field: 'status', title: '药方状态', width: 130}
+                , {field: 'belongToPatientName', title: '患者姓名', width: 150}
+                , {field: 'belongToDoctorName', title: '开药医生', width: 150}
+                , {field: 'did', title: '开药医生工号', width: 150}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 100}
             ]]
         });
         table.on('toolbar(prescriptionTable)', function (obj) {
             if (obj.event === 'addPre') {
+                var username = window.sessionStorage.getItem("username")
                 layer.open({
                     type: 1
                     , content: $("#window1")
@@ -76,32 +78,41 @@
                             "belongToPatientName": data1.patientName
                         }
                         $.ajax({
-                            url: '/prescription/create',
+                            url: '/prescription/create?username=' + username,
                             type: 'post',
                             contentType: "application/json",
                             data: JSON.stringify(postdata),
                             success: function (data) {
-                                table.render({
-                                    elem: '#prescriptionTable'
-                                    , height: 600
-                                    , url: '/prescription/allPre' //数据接口
-                                    , page: true //开启分页
-                                    , toolbar: '#toolbarDemo'
-                                    , cols: [[ //表头
-                                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-                                        , {field: 'description', title: '药方药品', width: 240}
-                                        , {field: 'usage', title: '使用方法', width: 180}
-                                        , {field: 'status', title: '药方状态', width: 180}
-                                        , {field: 'belongToPatientName', title: '患者姓名', width: 250}
-                                        , {field: 'createTime', title: '创建时间', width: 250}
-                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
-                                    ]]
-                                });
+                                if (data.data == -1) {
+                                    layer.confirm("不存在此患者！")
+                                } else if (data.data == -2) {
+                                    layer.confirm("药方中有不存在的药物！")
+                                } else if (data.data == -3) {
+                                    layer.confirm("药品最大数量为10")
+                                } else {
+                                    table.render({
+                                        elem: '#prescriptionTable'
+                                        , height: 600
+                                        , url: '/prescription/allPre' //数据接口
+                                        , page: true //开启分页
+                                        , toolbar: '#toolbarDemo'
+                                        , cols: [[ //表头
+                                            {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                                            , {field: 'description', title: '药方药品', width: 180}
+                                            , {field: 'usage', title: '使用方法', width: 180}
+                                            , {field: 'status', title: '药方状态', width: 130}
+                                            , {field: 'belongToPatientName', title: '患者姓名', width: 150}
+                                            , {field: 'belongToDoctorName', title: '开药医生', width: 150}
+                                            , {field: 'did', title: '开药医生工号', width: 150}
+                                            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 100}
+                                        ]]
+                                    });
+                                    layer.closeAll()
+                                }
+
                             },
                         })
 
-                        //data是默认值
-                        layer.closeAll();
 
                     }
                 });
@@ -159,13 +170,14 @@
                                     , page: true //开启分页
                                     , toolbar: '#toolbarDemo'
                                     , cols: [[ //表头
-                                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-                                        , {field: 'description', title: '药方药品', width: 240}
+                                        {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                                        , {field: 'description', title: '药方药品', width: 180}
                                         , {field: 'usage', title: '使用方法', width: 180}
-                                        , {field: 'status', title: '药方状态', width: 180}
-                                        , {field: 'belongToPatientName', title: '患者姓名', width: 250}
-                                        , {field: 'createTime', title: '创建时间', width: 250}
-                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+                                        , {field: 'status', title: '药方状态', width: 130}
+                                        , {field: 'belongToPatientName', title: '患者姓名', width: 150}
+                                        , {field: 'belongToDoctorName', title: '开药医生', width: 150}
+                                        , {field: 'did', title: '开药医生工号', width: 150}
+                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 100}
                                     ]]
                                 });
                             },

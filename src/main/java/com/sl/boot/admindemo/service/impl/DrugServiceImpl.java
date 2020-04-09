@@ -237,4 +237,12 @@ public class DrugServiceImpl implements DrugService {
         staRep.setDataO(staVos);
         return staRep;
     }
+
+    @Override
+    public List<Drug> queryDrug(String durgName) {
+        DrugExample drugExample = new DrugExample();
+        drugExample.createCriteria().andDrugNameLike(durgName);
+        List<Drug> drugs = drugDAO.selectByExample(drugExample);
+        return drugs;
+    }
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface DoctorService {
 
     List<Doctor> allDoctors(Integer page, Integer limit, BaseResp baseResp);
+
+    Integer update(Doctor doctor);
 }

@@ -924,6 +924,76 @@ public class PatientExample {
             addCriterion("medical_id not between", value1, value2, "medicalId");
             return (Criteria) this;
         }
+
+        public Criteria andPtypeIsNull() {
+            addCriterion("ptype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeIsNotNull() {
+            addCriterion("ptype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeEqualTo(String value) {
+            addCriterion("ptype =", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeNotEqualTo(String value) {
+            addCriterion("ptype <>", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeGreaterThan(String value) {
+            addCriterion("ptype >", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeGreaterThanOrEqualTo(String value) {
+            addCriterion("ptype >=", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeLessThan(String value) {
+            addCriterion("ptype <", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeLessThanOrEqualTo(String value) {
+            addCriterion("ptype <=", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeLike(String value) {
+            addCriterion("ptype like", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeNotLike(String value) {
+            addCriterion("ptype not like", value, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeIn(List<String> values) {
+            addCriterion("ptype in", values, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeNotIn(List<String> values) {
+            addCriterion("ptype not in", values, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeBetween(String value1, String value2) {
+            addCriterion("ptype between", value1, value2, "ptype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPtypeNotBetween(String value1, String value2) {
+            addCriterion("ptype not between", value1, value2, "ptype");
+            return (Criteria) this;
+        }
     }
 
     /**

@@ -12,6 +12,7 @@ import com.sl.boot.admindemo.service.PatientService;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.security.krb5.internal.PAData;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -96,8 +97,22 @@ public class PatientServiceImpl implements PatientService {
         pwdUser.setUserType(4);
         pwdUser.setUserName(patient.getPatientName());
         pwdUser.setPassword(patient.getPassword());
-        pwdUserDAO.insert(pwdUser);
         patient.setAddTime(new Date());
-        return patientDAO.insert(patient);
+        if (patient.getPatientName().equals("")) {
+            return 0;
+        } else {
+            pwdUserDAO.insert(pwdUser);
+            return patientDAO.insert(patient);
+        }
+
+    }
+
+    @Override
+    public List<Patient> search(String patientName) {
+
+        PatientExample patientExample = new PatientExample();
+        patientExample.createCriteria().andAnoNameLike(patientName);
+        List<Patient> patients = patientDAO.selectByExample(patientExample);
+        return patients;
     }
 }

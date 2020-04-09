@@ -8,6 +8,8 @@
         <result column="ano_name" jdbcType="VARCHAR" property="anoName"/>
         <result column="id_card" jdbcType="VARCHAR" property="idCard"/>
         <result column="phone_num" jdbcType="VARCHAR" property="phoneNum"/>
+        <result column="section" jdbcType="VARCHAR" property="section"/>
+        <result column="t_title" jdbcType="VARCHAR" property="tTitle"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -70,7 +72,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-    id, doctorName, InsertTime, ano_name, id_card, phone_num
+    id, doctorName, InsertTime, ano_name, id_card, phone_num, `section`, t_title
   </sql>
     <select id="selectByExample" parameterType="com.sl.boot.admindemo.entity.DoctorExample" resultMap="BaseResultMap">
         select
@@ -112,11 +114,11 @@
     </delete>
     <insert id="insert" parameterType="com.sl.boot.admindemo.entity.Doctor">
     insert into doctor (id, doctorName, InsertTime, 
-      ano_name, id_card, phone_num
-      )
+      ano_name, id_card, phone_num, 
+      `section`, t_title)
     values (#{id,jdbcType=INTEGER}, #{doctorname,jdbcType=VARCHAR}, #{inserttime,jdbcType=TIMESTAMP}, 
-      #{anoName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}
-      )
+      #{anoName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{section,jdbcType=VARCHAR}, #{tTitle,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.sl.boot.admindemo.entity.Doctor">
         insert into doctor
@@ -139,6 +141,12 @@
             <if test="phoneNum != null">
                 phone_num,
             </if>
+            <if test="section != null">
+                `section`,
+            </if>
+            <if test="tTitle != null">
+                t_title,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -158,6 +166,12 @@
             </if>
             <if test="phoneNum != null">
                 #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="section != null">
+                #{section,jdbcType=VARCHAR},
+            </if>
+            <if test="tTitle != null">
+                #{tTitle,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -188,6 +202,12 @@
             <if test="record.phoneNum != null">
                 phone_num = #{record.phoneNum,jdbcType=VARCHAR},
             </if>
+            <if test="record.section != null">
+                `section` = #{record.section,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tTitle != null">
+                t_title = #{record.tTitle,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -200,7 +220,9 @@
         InsertTime = #{record.inserttime,jdbcType=TIMESTAMP},
         ano_name = #{record.anoName,jdbcType=VARCHAR},
         id_card = #{record.idCard,jdbcType=VARCHAR},
-        phone_num = #{record.phoneNum,jdbcType=VARCHAR}
+        phone_num = #{record.phoneNum,jdbcType=VARCHAR},
+        `section` = #{record.section,jdbcType=VARCHAR},
+        t_title = #{record.tTitle,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -223,6 +245,12 @@
             <if test="phoneNum != null">
                 phone_num = #{phoneNum,jdbcType=VARCHAR},
             </if>
+            <if test="section != null">
+                `section` = #{section,jdbcType=VARCHAR},
+            </if>
+            <if test="tTitle != null">
+                t_title = #{tTitle,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -232,7 +260,9 @@
       InsertTime = #{inserttime,jdbcType=TIMESTAMP},
       ano_name = #{anoName,jdbcType=VARCHAR},
       id_card = #{idCard,jdbcType=VARCHAR},
-      phone_num = #{phoneNum,jdbcType=VARCHAR}
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      `section` = #{section,jdbcType=VARCHAR},
+      t_title = #{tTitle,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

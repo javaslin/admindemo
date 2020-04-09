@@ -1,4 +1,8 @@
 <div>
+    <div class="layui-inline">
+        <input class="layui-input" name="keyword" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
     <table id="drugTable" lay-filter="drugTable">
     </table>
 </div>
@@ -91,6 +95,47 @@
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
             ]]
         });
+
+        // form.on('submit(reloadlst_submit)', function (data) {
+        //     var key=data.field.keyword
+        //     table.render({
+        //         elem: '#drugTable'
+        //         , height: 600
+        //         , url: '/drug/search?drugName='+key //数据接口
+        //         , toolbar: '#toolbarDemo'
+        //         , cols: [[ //表头
+        //             {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+        //             , {field: 'drugName', title: '药品名称', width: 140}
+        //             , {field: 'drugCount', title: '数量', width: 80}
+        //             , {field: 'factory', title: '生产厂家', width: 180}
+        //             , {field: 'price', title: '价格（元）', width: 100}
+        //             , {field: 'drugFunction', title: '功能主治', width: 250}
+        //             , {field: 'size', title: '规格', width: 100}
+        //             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+        //         ]]
+        //     });
+        //
+        // })
+
+        $('.layui-btn').click(function () {
+            var inputVal = $('.layui-input').val()
+            table.render({
+                elem: '#drugTable'
+                , height: 600
+                , url: '/drug/search?drugName=' + inputVal //数据接口
+                , toolbar: '#toolbarDemo'
+                , cols: [[ //表头
+                    {field: 'id', title: 'ID', width: 60, sort: true, fixed: 'left'}
+                    , {field: 'drugName', title: '药品名称', width: 140}
+                    , {field: 'drugCount', title: '数量', width: 80}
+                    , {field: 'factory', title: '生产厂家', width: 180}
+                    , {field: 'price', title: '价格（元）', width: 100}
+                    , {field: 'drugFunction', title: '功能主治', width: 250}
+                    , {field: 'size', title: '规格', width: 100}
+                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 190}
+                ]]
+            });
+        })
 
 
         //监听行工具事件

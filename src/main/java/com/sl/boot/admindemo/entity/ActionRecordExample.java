@@ -534,7 +534,6 @@ public class ActionRecordExample {
     }
 
     /**
-     *
      */
     public static class Criteria extends GeneratedCriteria {
 

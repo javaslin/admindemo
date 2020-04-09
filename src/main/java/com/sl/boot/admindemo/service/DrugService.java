@@ -24,4 +24,7 @@ public interface DrugService {
     StaRep monthSta();
 
     StaRep quarterSta();
+
+    List<Drug> queryDrug(String durgName);
+
 }
