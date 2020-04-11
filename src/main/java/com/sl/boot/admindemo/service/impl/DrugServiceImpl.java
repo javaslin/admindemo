@@ -241,7 +241,10 @@ public class DrugServiceImpl implements DrugService {
     @Override
     public List<Drug> queryDrug(String durgName) {
         DrugExample drugExample = new DrugExample();
-        drugExample.createCriteria().andDrugNameLike(durgName);
+        StringBuffer sb = new StringBuffer(durgName);
+        sb.append("%");
+        sb.insert(0, '%');
+        drugExample.createCriteria().andDrugNameLike(sb.toString());
         List<Drug> drugs = drugDAO.selectByExample(drugExample);
         return drugs;
     }

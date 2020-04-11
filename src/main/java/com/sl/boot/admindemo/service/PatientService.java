@@ -16,6 +16,6 @@ public interface PatientService {
 
     Integer addOne(Patient patient);
 
-    List<Patient> search(String patientName);
+    List<PatientDTO> search(String patientName);
 
 }

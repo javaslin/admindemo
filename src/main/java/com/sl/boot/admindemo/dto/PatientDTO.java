@@ -68,4 +68,6 @@ public class PatientDTO {
     private Integer preId;
 
     private String status;
+
+    private String dname;
 }

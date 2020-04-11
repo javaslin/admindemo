@@ -76,6 +76,7 @@ public class PatientServiceImpl implements PatientService {
                 patientDTO.setUsage(prescription.getUsage());
                 patientDTO.setStatus(prescription.getStatus());
                 patientDTO.setPreId(prescription.getId());
+                patientDTO.setDname(prescription.getBelongToDoctorName());
             }
             return patientDTO;
         }).collect(Collectors.toList());
@@ -108,11 +109,46 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public List<Patient> search(String patientName) {
+    public List<PatientDTO> search(String patientName) {
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         PatientExample patientExample = new PatientExample();
-        patientExample.createCriteria().andAnoNameLike(patientName);
+        StringBuffer sb = new StringBuffer(patientName);
+        sb.insert(0, '%');
+        sb.append('%');
+        patientExample.createCriteria().andAnoNameLike(sb.toString());
         List<Patient> patients = patientDAO.selectByExample(patientExample);
-        return patients;
+        List<PatientDTO> patientDTOS = new ArrayList<>();
+        patientDTOS = patients.stream().map(m -> {
+            PatientDTO patientDTO = new PatientDTO();
+            patientDTO.setAddTime(simpleDateFormat.format(m.getAddTime()));
+            patientDTO.setAge(m.getAge());
+            patientDTO.setAnoName(m.getAnoName());
+            patientDTO.setDisease(m.getDisease());
+            patientDTO.setGender(m.getGender());
+            patientDTO.setId(m.getId());
+            patientDTO.setIdCard(m.getIdCard());
+            patientDTO.setMedicalId(m.getMedicalId());
+            patientDTO.setPatientName(m.getPatientName());
+            PrescriptionExample prescriptionExample = new PrescriptionExample();
+            prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(m.getAnoName());
+            List<Prescription> prescriptions = prescriptionDAO.selectByExample(prescriptionExample);
+            if (prescriptions.size() == 0) {
+                patientDTO.setDescription("");
+                patientDTO.setUsage("");
+                patientDTO.setPreId(-1);
+                patientDTO.setStatus("无");
+            } else {
+                Prescription prescription = prescriptions.get(0);
+                patientDTO.setDescription(prescription.getDescription());
+                patientDTO.setUsage(prescription.getUsage());
+                patientDTO.setStatus(prescription.getStatus());
+                patientDTO.setPreId(prescription.getId());
+                patientDTO.setDname(prescription.getBelongToDoctorName());
+            }
+            return patientDTO;
+        }).collect(Collectors.toList());
+        return patientDTOS;
+
     }
 }

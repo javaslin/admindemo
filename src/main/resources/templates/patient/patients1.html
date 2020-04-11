@@ -1,4 +1,8 @@
 <div>
+    <div class="layui-inline">
+        <input class="layui-input" name="keyword" placeholder="搜索患者" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
     <table id="patientTable1" lay-filter="patientTable1">
     </table>
 </div>
@@ -57,19 +61,39 @@
             , height: 600
             , url: '/patient/all' //数据接口
             , page: true //开启分页
-            , toolbar: '#toolbarDemo'
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
                 , {field: 'patientName', title: '患者用户名', width: 120}
                 , {field: 'anoName', title: '患者姓名', width: 120, sort: true}
                 , {field: 'preId', title: '药方ID', width: 80}
-                , {field: 'description', title: '药方', width: 180}
+                , {field: 'description', title: '药方', width: 150}
                 , {field: 'status', title: '药方状态', width: 100}
                 , {field: 'addTime', title: '时间', width: 100, sort: true}
-                , {field: 'usage', title: '使用方法', width: 230}
-                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
+                , {field: 'usage', title: '使用方法', width: 180}
+                , {field: 'dname', title: '开药医生', width: 120}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 80}
             ]]
         });
+        $('.layui-btn').click(function () {
+            var inputVal = $('.layui-input').val()
+            table.render({
+                elem: '#patientTable1'
+                , height: 600
+                , url: '/patient/search?patientName=' + inputVal//数据接口
+                , cols: [[ //表头
+                    {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                    , {field: 'patientName', title: '患者用户名', width: 120}
+                    , {field: 'anoName', title: '患者姓名', width: 120, sort: true}
+                    , {field: 'preId', title: '药方ID', width: 80}
+                    , {field: 'description', title: '药方', width: 150}
+                    , {field: 'status', title: '药方状态', width: 100}
+                    , {field: 'addTime', title: '时间', width: 100, sort: true}
+                    , {field: 'usage', title: '使用方法', width: 180}
+                    , {field: 'dname', title: '开药医生', width: 80}
+                    , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
+                ]]
+            });
+        })
         table.on('tool(patientTable1)', function (obj) {
             var data = obj.data;
             //console.log(obj)
@@ -95,16 +119,16 @@
                                         , height: 600
                                         , url: '/patient/all' //数据接口
                                         , page: true //开启分页
-                                        , toolbar: '#toolbarDemo'
                                         , cols: [[ //表头
                                             {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
                                             , {field: 'patientName', title: '患者用户名', width: 120}
                                             , {field: 'anoName', title: '患者姓名', width: 120, sort: true}
                                             , {field: 'preId', title: '药方ID', width: 80}
-                                            , {field: 'description', title: '药方', width: 180}
+                                            , {field: 'description', title: '药方', width: 150}
                                             , {field: 'status', title: '药方状态', width: 100}
                                             , {field: 'addTime', title: '时间', width: 100, sort: true}
-                                            , {field: 'usage', title: '使用方法', width: 230}
+                                            , {field: 'usage', title: '使用方法', width: 180}
+                                            , {field: 'dname', title: '开药医生', width: 80}
                                             , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
                                         ]]
                                     });

@@ -89,6 +89,8 @@
                                     layer.confirm("药方中有不存在的药物！")
                                 } else if (data.data == -3) {
                                     layer.confirm("药品最大数量为10")
+                                } else if (data.data == -4) {
+                                    layer.confirm("不存在此医生")
                                 } else {
                                     table.render({
                                         elem: '#prescriptionTable'

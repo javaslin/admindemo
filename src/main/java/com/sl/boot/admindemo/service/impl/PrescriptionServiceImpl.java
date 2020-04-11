@@ -51,6 +51,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             Doctor doctor = doctors.get(0);
             prescription.setBelongToDoctorName(doctor.getAnoName());
             prescription.setDid(doctor.getId());
+        } else {
+            return -4;
         }
         List<String> paNs = new ArrayList<>();
         for (Patient p : patients) {
@@ -130,15 +132,18 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             }
             Drug drug = new Drug();
             DrugExample drugExample1 = new DrugExample();
-            drugExample.createCriteria().andDrugNameEqualTo(drugAndCount[0]);
+            drugExample1.createCriteria().andDrugNameEqualTo(drugAndCount[0]);
             List<Drug> drugs2 = drugDAO.selectByExample(drugExample1);
             if (drugs2.size() != 0) {
                 Drug drug1 = drugs2.get(0);
+                drug1.setId(null);
+                System.out.println("=================drugAndCount[1]=====" + drugAndCount[1]);
                 Long count = drug1.getDrugCount() - Integer.parseInt(drugAndCount[1]);
+                System.out.println("=================count=====" + count);
                 if (count < 0) {
                     return -1;
                 }
-                drug.setDrugCount(count);
+                drug1.setDrugCount(count);
                 ActionRecord actionRecord = new ActionRecord();
                 actionRecord.setAction("出库药品");
                 actionRecord.setDrugName(drugAndCount[0]);
