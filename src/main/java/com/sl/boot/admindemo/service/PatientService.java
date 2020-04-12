@@ -12,7 +12,7 @@ public interface PatientService {
 
     List<PatientDTO> queryAllPatient(Integer page, Integer limit, BaseResp baseResp);
 
-    Integer updateOne(Patient patient);
+    Integer updateOne(Patient patient, String patientName);
 
     Integer addOne(Patient patient);
 

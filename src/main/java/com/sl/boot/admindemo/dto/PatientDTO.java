@@ -70,4 +70,6 @@ public class PatientDTO {
     private String status;
 
     private String dname;
+
+    private String ptype;
 }

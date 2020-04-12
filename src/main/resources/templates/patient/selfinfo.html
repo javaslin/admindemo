@@ -85,7 +85,7 @@
         form.on('submit(submit)', function (data1) {
             $.ajax({
                 type: "POST",
-                url: "/patient/update",
+                url: "/patient/update?patientName=" + window.sessionStorage.getItem("username"),
                 data: JSON.stringify(data1.field),
                 contentType: "application/json",
                 error: function (request) {

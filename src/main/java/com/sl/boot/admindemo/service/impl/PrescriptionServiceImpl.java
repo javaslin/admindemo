@@ -51,6 +51,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             Doctor doctor = doctors.get(0);
             prescription.setBelongToDoctorName(doctor.getAnoName());
             prescription.setDid(doctor.getId());
+            prescription.setStatus("未取药");
         } else {
             return -4;
         }
@@ -102,12 +103,16 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         patientExample.createCriteria().andPatientNameEqualTo(patientName);
         List<Patient> patients = patientDAO.selectByExample(patientExample);
         if (patients.size() != 0) {
+            if (patients.get(0).getAnoName() == null) {
+                return new ArrayList<Prescription>();
+            }
             PrescriptionExample prescriptionExample = new PrescriptionExample();
             prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(patients.get(0).getAnoName());
             return prescriptionDAO.selectByExample(prescriptionExample);
+        } else {
+            return new ArrayList<Prescription>();
         }
 
-        return new ArrayList<Prescription>();
     }
 
     @Override

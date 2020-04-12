@@ -37,6 +37,8 @@ public class DoctorServiceImpl implements DoctorService {
         doctor1.setAnoName(doctor.getAnoName());
         doctor1.setIdCard(doctor.getIdCard());
         doctor1.setPhoneNum(doctor.getPhoneNum());
+        doctor1.setSection(doctor.getSection());
+        doctor1.setTTitle(doctor.getTTitle());
         DoctorExample doctorExample = new DoctorExample();
         doctorExample.createCriteria().andIdEqualTo(doctor.getId());
         return doctorDAO.updateByExampleSelective(doctor1, doctorExample);

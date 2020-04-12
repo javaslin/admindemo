@@ -8,31 +8,31 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="text" id="anoName" name="anoName" autocomplete="off" placeholder="请输入用户名   "
+                <input type="text" id="anoName" name="anoName" autocomplete="off" placeholder="请输入姓名"
                        class="layui-input">
             </div>
             <br> <br>
             <label class="layui-form-label">身份证号码</label>
             <div class="layui-input-block">
-                <input type="text" id="idCard" name="idCard" autocomplete="off" placeholder="请输入真实姓名"
+                <input type="text" id="idCard" name="idCard" autocomplete="off" placeholder="请输入身份证号码"
                        class="layui-input">
             </div>
             <br> <br>
             <label class="layui-form-label">手机号码</label>
             <div class="layui-input-block">
-                <input type="text" id="phoneNum" name="phoneNum" autocomplete="off" placeholder="请输入年龄"
+                <input type="text" id="phoneNum" name="phoneNum" autocomplete="off" placeholder="请输入手机号码"
                        class="layui-input">
             </div>
             <br> <br>
             <label class="layui-form-label">科室</label>
             <div class="layui-input-block">
-                <input type="text" id="section" name="section" autocomplete="off" placeholder="请输入年龄"
+                <input type="text" id="section" name="section" autocomplete="off" placeholder="请输入科室"
                        class="layui-input">
             </div>
             <br> <br>
             <label class="layui-form-label">职称</label>
             <div class="layui-input-block">
-                <input type="text" id="tTitle" name="tTitle" autocomplete="off" placeholder="请输入年龄"
+                <input type="text" id="ttitle" name="ttitle" autocomplete="off" placeholder="请输入职称"
                        class="layui-input">
             </div>
 
@@ -54,14 +54,14 @@
             , page: true //开启分页
             , cols: [[ //表头
                 {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-                , {field: 'doctorname', title: '医生用户名', width: 150}
-                , {field: 'anoName', title: '姓名', width: 150}
+                , {field: 'doctorname', title: '医生用户名', width: 130}
+                , {field: 'anoName', title: '姓名', width: 120}
                 , {field: 'idCard', title: '身份证号码', width: 100}
                 , {field: 'phoneNum', title: '手机号码', width: 100}
                 , {field: 'inserttime', title: '添加时间', width: 230}
-                , {field: 'section', title: '科室', width: 230}
-                , {field: 'tTitle', title: '职称', width: 230}
-                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 100}
+                , {field: 'section', title: '科室', width: 130}
+                , {field: 'ttitle', title: '职称', width: 130}
+                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 70}
 
             ]]
         });
@@ -71,7 +71,9 @@
                 form.val("updatedoc", {
                     "anoName": data.anoName,
                     "idCard": data.idCard,
-                    "phoneNum": data.phoneNum
+                    "phoneNum": data.phoneNum,
+                    "section": data.section,
+                    "ttitle": data.ttitle
                 });
                 layer.open({
                     type: 1
@@ -88,7 +90,7 @@
                             "idCard": data1.idCard,
                             "phoneNum": data1.phoneNum,
                             "section": data1.section,
-                            "tTitle": data1.tTitle
+                            "tTitle": data1.ttitle
                         }
                         $.ajax({
                             url: '/doctor/update',
@@ -104,14 +106,14 @@
                                     , page: true //开启分页
                                     , cols: [[ //表头
                                         {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-                                        , {field: 'doctorname', title: '医生用户名', width: 150}
-                                        , {field: 'anoName', title: '姓名', width: 150}
+                                        , {field: 'doctorname', title: '医生用户名', width: 130}
+                                        , {field: 'anoName', title: '姓名', width: 120}
                                         , {field: 'idCard', title: '身份证号码', width: 100}
                                         , {field: 'phoneNum', title: '手机号码', width: 100}
                                         , {field: 'inserttime', title: '添加时间', width: 230}
-                                        , {field: 'section', title: '科室', width: 230}
-                                        , {field: 'tTitle', title: '职称', width: 230}
-                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 100}
+                                        , {field: 'section', title: '科室', width: 130}
+                                        , {field: 'ttitle', title: '职称', width: 130}
+                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 70}
 
                                     ]]
                                 });

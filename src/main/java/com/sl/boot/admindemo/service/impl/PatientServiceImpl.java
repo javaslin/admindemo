@@ -12,8 +12,6 @@ import com.sl.boot.admindemo.service.PatientService;
 import com.sl.boot.admindemo.vo.resp.BaseResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.security.krb5.internal.PAData;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +60,11 @@ public class PatientServiceImpl implements PatientService {
             patientDTO.setIdCard(m.getIdCard());
             patientDTO.setMedicalId(m.getMedicalId());
             patientDTO.setPatientName(m.getPatientName());
+            patientDTO.setPtype(m.getPtype());
             PrescriptionExample prescriptionExample = new PrescriptionExample();
+            if (m.getAnoName() == null) {
+                return patientDTO;
+            }
             prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(m.getAnoName());
             List<Prescription> prescriptions = prescriptionDAO.selectByExample(prescriptionExample);
             if (prescriptions.size() == 0) {
@@ -85,11 +87,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Integer updateOne(Patient patient) {
+    public Integer updateOne(Patient patient, String patientName) {
         PatientExample patientExample = new PatientExample();
-        patientExample.createCriteria().andAnoNameEqualTo(patient.getAnoName());
+        patientExample.createCriteria().andPatientNameEqualTo(patientName);
         patientDAO.updateByExampleSelective(patient, patientExample);
-        return null;
+        return patientDAO.updateByExampleSelective(patient, patientExample);
     }
 
     @Override

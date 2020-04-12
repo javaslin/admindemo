@@ -35,8 +35,8 @@ public class PatientController {
     }
 
     @PostMapping(value = "update")
-    public BaseResp update(@RequestBody Patient patient) {
-        return new BaseResp(patientService.updateOne(patient));
+    public BaseResp update(@RequestBody Patient patient, @RequestParam(value = "patientName") String patientName) {
+        return new BaseResp(patientService.updateOne(patient, patientName));
     }
 
     @PostMapping(value = "add")
