@@ -57,7 +57,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         }
         List<String> paNs = new ArrayList<>();
         for (Patient p : patients) {
-            paNs.add(p.getAnoName());
+            paNs.add(p.getPatientName());
         }
         String[] split = prescription.getDescription().split(",");
         List<String> objects = new ArrayList<>();
@@ -107,7 +107,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 return new ArrayList<Prescription>();
             }
             PrescriptionExample prescriptionExample = new PrescriptionExample();
-            prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(patients.get(0).getAnoName());
+            prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(patients.get(0).getPatientName());
             return prescriptionDAO.selectByExample(prescriptionExample);
         } else {
             return new ArrayList<Prescription>();

@@ -80,6 +80,19 @@ public class AdminUserServiceImpl implements AdminUserService {
     public Integer delUser(String userName, Integer type) {
         PwdUserExample pwdUserExample = new PwdUserExample();
         pwdUserExample.createCriteria().andUserNameEqualTo(userName);
+        if (type == 3) {
+            DoctorExample doctorExample = new DoctorExample();
+            doctorExample.createCriteria().andDoctornameEqualTo(userName);
+            doctorDAO.deleteByExample(doctorExample);
+        } else if (type == 2) {
+            DrugAdminUserExample drugAdminUserExample = new DrugAdminUserExample();
+            drugAdminUserExample.createCriteria().andDrugAdminUsernameEqualTo(userName);
+            drugAdminUserDAO.deleteByExample(drugAdminUserExample);
+        } else if (type == 4) {
+            PatientExample patientExample = new PatientExample();
+            patientExample.createCriteria().andPatientNameEqualTo(userName);
+            patientDAO.deleteByExample(patientExample);
+        }
         return pwdUserDAO.deleteByExample(pwdUserExample);
     }
 

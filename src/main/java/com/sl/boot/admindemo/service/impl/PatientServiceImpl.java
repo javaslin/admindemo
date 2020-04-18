@@ -65,7 +65,7 @@ public class PatientServiceImpl implements PatientService {
             if (m.getAnoName() == null) {
                 return patientDTO;
             }
-            prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(m.getAnoName());
+            prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(m.getPatientName());
             List<Prescription> prescriptions = prescriptionDAO.selectByExample(prescriptionExample);
             if (prescriptions.size() == 0) {
                 patientDTO.setDescription("");
@@ -73,6 +73,16 @@ public class PatientServiceImpl implements PatientService {
                 patientDTO.setPreId(-1);
                 patientDTO.setStatus("无");
             } else {
+                for (Prescription prescription : prescriptions) {
+                    if (prescription.getStatus().equals("未取药")) {
+                        patientDTO.setDescription(prescription.getDescription());
+                        patientDTO.setUsage(prescription.getUsage());
+                        patientDTO.setStatus(prescription.getStatus());
+                        patientDTO.setPreId(prescription.getId());
+                        patientDTO.setDname(prescription.getBelongToDoctorName());
+                        return patientDTO;
+                    }
+                }
                 Prescription prescription = prescriptions.get(0);
                 patientDTO.setDescription(prescription.getDescription());
                 patientDTO.setUsage(prescription.getUsage());
@@ -101,8 +111,11 @@ public class PatientServiceImpl implements PatientService {
         pwdUser.setUserName(patient.getPatientName());
         pwdUser.setPassword(patient.getPassword());
         patient.setAddTime(new Date());
-        if (patient.getPatientName().equals("")) {
-            return 0;
+        PatientExample patientExample = new PatientExample();
+        patientExample.createCriteria().andPatientNameEqualTo(patient.getPatientName());
+        List<Patient> patients = patientDAO.selectByExample(patientExample);
+        if (patients.size() != 0) {
+            return -1;
         } else {
             pwdUserDAO.insert(pwdUser);
             return patientDAO.insert(patient);
@@ -133,7 +146,7 @@ public class PatientServiceImpl implements PatientService {
             patientDTO.setMedicalId(m.getMedicalId());
             patientDTO.setPatientName(m.getPatientName());
             PrescriptionExample prescriptionExample = new PrescriptionExample();
-            prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(m.getAnoName());
+            prescriptionExample.createCriteria().andBelongToPatientNameEqualTo(m.getPatientName());
             List<Prescription> prescriptions = prescriptionDAO.selectByExample(prescriptionExample);
             if (prescriptions.size() == 0) {
                 patientDTO.setDescription("");

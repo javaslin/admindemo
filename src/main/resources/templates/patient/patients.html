@@ -1,13 +1,16 @@
 <div>
-
-<table id="patientTable" lay-filter="patientTable">
+    <div class="layui-inline">
+        <input class="layui-input" name="keyword" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+    <table id="patientTable" lay-filter="patientTable">
     </table>
 </div>
-<script type="text/html" id="toolbarDemo">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="addpatient1">添加患者</button>
-    </div>
-</script>
+<!--<script type="text/html" id="toolbarDemo">-->
+<!--    <div class="layui-btn-container">-->
+<!--        <button class="layui-btn layui-btn-sm" lay-event="addpatient1">添加患者</button>-->
+<!--    </div>-->
+<!--</script>-->
 <div class="site-text" style="margin: 5%; display: none" id="window2">
     <form class="layui-form" id="addpatient" lay-filter="addpatient">
         <div class="layui-form-item">
@@ -77,25 +80,25 @@
                 , {field: 'ptype', title: '类型', width: 100}
             ]]
         });
-        // $('.layui-btn').click(function () {
-        //     var inputVal = $('.layui-input').val()
-        //     table.render({
-        //         elem: '#patientTable'
-        //         , height: 600
-        //         , url: '/patient/search?patientName=' + inputVal//数据接口
-        //         , toolbar: '#toolbarDemo'
-        //         , cols: [[ //表头
-        //             {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-        //             , {field: 'patientName', title: '患者用户名', width: 140}
-        //             , {field: 'age', title: '年龄', width: 150}
-        //             , {field: 'gender', title: '性别', width: 100}
-        //             , {field: 'anoName', title: '患者姓名', width: 100}
-        //             , {field: 'addTime', title: '添加时间', width: 230}
-        //             , {field: 'disease', title: '患病', width: 180}
-        //             , {field: 'ptype', title: '类型', width: 100}
-        //         ]]
-        //     });
-        // })
+        $('.layui-btn').click(function () {
+            var inputVal = $('.layui-input').val()
+            table.render({
+                elem: '#patientTable'
+                , height: 600
+                , url: '/patient/search?patientName=' + inputVal//数据接口
+                , toolbar: '#toolbarDemo'
+                , cols: [[ //表头
+                    {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                    , {field: 'patientName', title: '患者用户名', width: 140}
+                    , {field: 'age', title: '年龄', width: 150}
+                    , {field: 'gender', title: '性别', width: 100}
+                    , {field: 'anoName', title: '患者姓名', width: 100}
+                    , {field: 'addTime', title: '添加时间', width: 230}
+                    , {field: 'disease', title: '患病', width: 180}
+                    , {field: 'ptype', title: '类型', width: 100}
+                ]]
+            });
+        })
         table.on('toolbar(patientTable)', function (obj) {
             //console.log(obj)
             if (obj.event === 'addpatient1') {

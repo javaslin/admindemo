@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 09/04/2020 21:56:52
+ Date: 12/04/2020 14:16:29
 */
 
 SET NAMES utf8mb4;
@@ -72,6 +72,21 @@ INSERT INTO `action_record` VALUES (35, NULL, '氨茶碱片', '出库药品', '2
 INSERT INTO `action_record` VALUES (36, NULL, '氨茶碱片', '入库药品', '2020-04-08', 22);
 INSERT INTO `action_record` VALUES (37, NULL, '银翘解毒颗粒', '入库药品', '2020-04-08', 22);
 INSERT INTO `action_record` VALUES (38, NULL, '氨茶碱片', '入库药品', '2020-04-09', 20);
+INSERT INTO `action_record` VALUES (39, NULL, '氨茶碱片', '出库药品', '2020-04-11', 4);
+INSERT INTO `action_record` VALUES (40, NULL, '氨茶碱片', '出库药品', '2020-04-11', 4);
+INSERT INTO `action_record` VALUES (41, NULL, '氨茶碱片', '出库药品', '2020-04-11', 4);
+INSERT INTO `action_record` VALUES (42, NULL, '氨茶碱片', '出库药品', '2020-04-11', 4);
+INSERT INTO `action_record` VALUES (43, NULL, '氨茶碱片', '出库药品', '2020-04-11', 4);
+INSERT INTO `action_record` VALUES (44, NULL, '氨茶碱片', '出库药品', '2020-04-11', 4);
+INSERT INTO `action_record` VALUES (45, NULL, '氨茶碱片', '出库药品', '2020-04-11', 4);
+INSERT INTO `action_record` VALUES (46, NULL, '氨茶碱片', '出库药品', '2020-04-11', 5);
+INSERT INTO `action_record` VALUES (47, NULL, '复方丹参片', '出库药品', '2020-04-11', 7);
+INSERT INTO `action_record` VALUES (48, NULL, '氨茶碱片', '出库药品', '2020-04-11', 5);
+INSERT INTO `action_record` VALUES (49, NULL, '复方丹参片', '出库药品', '2020-04-11', 7);
+INSERT INTO `action_record` VALUES (50, NULL, '氨茶碱片', '出库药品', '2020-04-11', 5);
+INSERT INTO `action_record` VALUES (51, NULL, '复方丹参片', '出库药品', '2020-04-11', 7);
+INSERT INTO `action_record` VALUES (52, NULL, '氨茶碱片', '出库药品', '2020-04-11', 5);
+INSERT INTO `action_record` VALUES (53, NULL, '复方丹参片', '出库药品', '2020-04-11', 7);
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -109,6 +124,7 @@ CREATE TABLE `doctor`  (
 -- Records of doctor
 -- ----------------------------
 INSERT INTO `doctor` VALUES (1, 'doctor1', '2020-03-14 16:30:00', '张一样', '1112', '111111111', NULL, NULL);
+INSERT INTO `doctor` VALUES (2, 'doctor2', '2020-04-12 13:31:33', '哈哈', '21314', '224141', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for drug
@@ -129,8 +145,8 @@ CREATE TABLE `drug`  (
 -- ----------------------------
 -- Records of drug
 -- ----------------------------
-INSERT INTO `drug` VALUES (1, '氨茶碱片', 478, '\r\n国药集团汕头金石制药有限公司', 20, '2020-03-12', '适用于支气管哮喘、喘息型支气管炎、阻塞性肺气肿等缓解喘息症状；也可用于心源性肺水肿引起的哮喘。', '100片');
-INSERT INTO `drug` VALUES (3, '复方丹参片', 436, '	贵州飞云岭药业股份有限公司', 10, '2020-02-26', '活血化瘀，理气止痛。用于气滞血瘀所致的胸痹，症见胸闷、心前区刺痛；冠心病心绞痛见上述症候者。', '60片');
+INSERT INTO `drug` VALUES (1, '氨茶碱片', 473, '\r\n国药集团汕头金石制药有限公司', 20, '2020-03-12', '适用于支气管哮喘、喘息型支气管炎、阻塞性肺气肿等缓解喘息症状；也可用于心源性肺水肿引起的哮喘。', '100片');
+INSERT INTO `drug` VALUES (3, '复方丹参片', 429, '	贵州飞云岭药业股份有限公司', 10, '2020-02-26', '活血化瘀，理气止痛。用于气滞血瘀所致的胸痹，症见胸闷、心前区刺痛；冠心病心绞痛见上述症候者。', '60片');
 INSERT INTO `drug` VALUES (8, '酚咖片 ', 436, '河北奥星药业有限公司', 10, '2020-03-11', '适用于伴有痰液分泌不正常及排痰功能不良的急性、慢性呼吸道疾病，例如慢性支气管炎急性加重、喘息型支气管炎、支气管扩张及支气管哮喘的祛痰治疗。', '20片');
 INSERT INTO `drug` VALUES (9, '板蓝根颗粒', 436, '甘肃河西制药有限责任公司', 40, '2020-03-18', '温补肝肾，益精养血。用于血虚头晕，腰膝酸冷，虚劳消瘦。', '10袋');
 INSERT INTO `drug` VALUES (10, '藿香清胃胶囊', 436, '吉林省俊宏药业有限公司', 32, '2020-03-20', '清热化湿，醒脾消滞。用于脾胃伏火引起的消化不良，脘腹涨满，不思饮食、口苦口臭等症。', '42粒');
@@ -178,8 +194,8 @@ CREATE TABLE `patient`  (
 -- Records of patient
 -- ----------------------------
 INSERT INTO `patient` VALUES (1, 'patient1', '2020-03-12 22:31:16', '123456', '咳嗽', '14', '女', 2, 1, '张三', '56462', '341131', '住院');
-INSERT INTO `patient` VALUES (6, 'patient2', '2020-03-27 22:43:48', '123456', '咳嗽', '25', '男', NULL, NULL, '李四', '42152', '26425', '门诊');
-INSERT INTO `patient` VALUES (8, 'patient34', '2020-03-27 22:55:06', '123456', '发烧', '12', '女', NULL, NULL, '王五', '52452', '45245', '门诊');
+INSERT INTO `patient` VALUES (9, 'patient2', '2020-04-12 13:25:14', NULL, '', '25', '男', NULL, NULL, '李文峰', '243567', '', '');
+INSERT INTO `patient` VALUES (10, 'patient3', '2020-04-12 13:48:54', '123456', '', '25', '', NULL, NULL, 'lisi', NULL, NULL, '住院');
 
 -- ----------------------------
 -- Table structure for prescription
@@ -195,15 +211,12 @@ CREATE TABLE `prescription`  (
   `belong_to_doctor_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '开局药方的医生的姓名',
   `did` int(11) NULL DEFAULT NULL COMMENT '医生ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '药方' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '药方' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of prescription
 -- ----------------------------
-INSERT INTO `prescription` VALUES (1, '氨茶碱片x4', '每日1次', '已取药', '2020-03-16', '张三', '', NULL);
-INSERT INTO `prescription` VALUES (6, '氨茶碱片x5', '每日四次，每次1片', '已取药', NULL, '王五', '', NULL);
-INSERT INTO `prescription` VALUES (9, '氨茶碱片x1', '111', NULL, NULL, 'lisi', '', NULL);
-INSERT INTO `prescription` VALUES (10, '氨茶碱片x4', '222', NULL, NULL, '张三', '张一样', 1);
+INSERT INTO `prescription` VALUES (11, '氨茶碱片x5,复方丹参片x7', '哈哈', '已取药', NULL, '张三', '张一样', 1);
 
 -- ----------------------------
 -- Table structure for pwd_user
@@ -224,7 +237,9 @@ INSERT INTO `pwd_user` VALUES (1, 'admin', '123456', 1);
 INSERT INTO `pwd_user` VALUES (2, 'patient1', '123456', 4);
 INSERT INTO `pwd_user` VALUES (4, 'doctor1', '123456', 3);
 INSERT INTO `pwd_user` VALUES (5, 'drugadmin1', '123456', 2);
-INSERT INTO `pwd_user` VALUES (8, 'patient3', '123456', 4);
 INSERT INTO `pwd_user` VALUES (9, 'drugadmin2', '123456', 2);
+INSERT INTO `pwd_user` VALUES (10, 'patient2', 'asdfgh', 4);
+INSERT INTO `pwd_user` VALUES (11, 'doctor2', '123456', 3);
+INSERT INTO `pwd_user` VALUES (12, 'patient3', '123456', 4);
 
 SET FOREIGN_KEY_CHECKS = 1;

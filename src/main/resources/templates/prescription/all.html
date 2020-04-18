@@ -28,9 +28,9 @@
                        class="layui-input">
             </div>
             <br> <br>
-            <label class="layui-form-label">患者姓名</label>
+            <label class="layui-form-label">患者用户名</label>
             <div class="layui-input-block">
-                <input type="text" id="patientName" name="patientName" autocomplete="off" placeholder="请输入患者姓名"
+                <input type="text" id="patientName" name="patientName" autocomplete="off" placeholder="请输入患者用户名"
                        class="layui-input">
             </div>
 
@@ -54,7 +54,7 @@
                 , {field: 'description', title: '药方药品', width: 180}
                 , {field: 'usage', title: '使用方法', width: 180}
                 , {field: 'status', title: '药方状态', width: 130}
-                , {field: 'belongToPatientName', title: '患者姓名', width: 150}
+                , {field: 'belongToPatientName', title: '患者用户名', width: 150}
                 , {field: 'belongToDoctorName', title: '开药医生', width: 150}
                 , {field: 'did', title: '开药医生工号', width: 130}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
@@ -72,48 +72,52 @@
                     , shade: 0 //不显示遮罩
                     , yes: function () {
                         var data1 = form.val("addpresc");
-                        var postdata = {
-                            "description": data1.drugsName,
-                            "usage": data1.usage,
-                            "belongToPatientName": data1.patientName
-                        }
-                        $.ajax({
-                            url: '/prescription/create?username=' + username,
-                            type: 'post',
-                            contentType: "application/json",
-                            data: JSON.stringify(postdata),
-                            success: function (data) {
-                                if (data.data == -1) {
-                                    layer.confirm("不存在此患者！")
-                                } else if (data.data == -2) {
-                                    layer.confirm("药方中有不存在的药物！")
-                                } else if (data.data == -3) {
-                                    layer.confirm("药品最大数量为10")
-                                } else if (data.data == -4) {
-                                    layer.confirm("不存在此医生")
-                                } else {
-                                    table.render({
-                                        elem: '#prescriptionTable'
-                                        , height: 600
-                                        , url: '/prescription/allPre' //数据接口
-                                        , page: true //开启分页
-                                        , toolbar: '#toolbarDemo'
-                                        , cols: [[ //表头
-                                            {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
-                                            , {field: 'description', title: '药方药品', width: 180}
-                                            , {field: 'usage', title: '使用方法', width: 180}
-                                            , {field: 'status', title: '药方状态', width: 130}
-                                            , {field: 'belongToPatientName', title: '患者姓名', width: 150}
-                                            , {field: 'belongToDoctorName', title: '开药医生', width: 150}
-                                            , {field: 'did', title: '开药医生工号', width: 130}
-                                            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
-                                        ]]
-                                    });
-                                    layer.closeAll()
-                                }
+                        if (data1.drugsName == '') {
+                            layer.confirm("药方内容不能为空！")
+                        } else {
+                            var postdata = {
+                                "description": data1.drugsName,
+                                "usage": data1.usage,
+                                "belongToPatientName": data1.patientName
+                            }
+                            $.ajax({
+                                url: '/prescription/create?username=' + username,
+                                type: 'post',
+                                contentType: "application/json",
+                                data: JSON.stringify(postdata),
+                                success: function (data) {
+                                    if (data.data == -1) {
+                                        layer.confirm("不存在此患者！")
+                                    } else if (data.data == -2) {
+                                        layer.confirm("药方中有不存在的药物！")
+                                    } else if (data.data == -3) {
+                                        layer.confirm("药品最大数量为10")
+                                    } else if (data.data == -4) {
+                                        layer.confirm("不存在此医生")
+                                    } else {
+                                        table.render({
+                                            elem: '#prescriptionTable'
+                                            , height: 600
+                                            , url: '/prescription/allPre' //数据接口
+                                            , page: true //开启分页
+                                            , toolbar: '#toolbarDemo'
+                                            , cols: [[ //表头
+                                                {field: 'id', title: 'ID', width: 70, sort: true, fixed: 'left'}
+                                                , {field: 'description', title: '药方药品', width: 180}
+                                                , {field: 'usage', title: '使用方法', width: 180}
+                                                , {field: 'status', title: '药方状态', width: 130}
+                                                , {field: 'belongToPatientName', title: '患者用户名', width: 150}
+                                                , {field: 'belongToDoctorName', title: '开药医生', width: 150}
+                                                , {field: 'did', title: '开药医生工号', width: 130}
+                                                , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}
+                                            ]]
+                                        });
+                                        layer.closeAll()
+                                    }
 
-                            },
-                        })
+                                },
+                            })
+                        }
 
 
                     }
@@ -176,7 +180,7 @@
                                         , {field: 'description', title: '药方药品', width: 180}
                                         , {field: 'usage', title: '使用方法', width: 180}
                                         , {field: 'status', title: '药方状态', width: 130}
-                                        , {field: 'belongToPatientName', title: '患者姓名', width: 150}
+                                        , {field: 'belongToPatientName', title: '患者用户名', width: 150}
                                         , {field: 'belongToDoctorName', title: '开药医生', width: 150}
                                         , {field: 'did', title: '开药医生工号', width: 130}
                                         , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 120}

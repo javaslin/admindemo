@@ -83,32 +83,40 @@
                     , shade: 0 //不显示遮罩
                     , yes: function () {
                         var data1 = form.val("adduser");
-                        var postdata = {"userName": data1.username, "passWord": data1.password, "type": data1.type}
-                        $.ajax({
-                            url: '/adminUser/addOne',
-                            type: 'post',
-                            contentType: "application/json",
-                            data: JSON.stringify(postdata),
-                            success: function (data) {
-                                table.render({
-                                    elem: '#alluserTable'
-                                    , height: 600
-                                    , url: '/adminUser/all' //数据接口
-                                    , toolbar: '#toolbarDemo'
-                                    , page: true //开启分页
-                                    , cols: [[ //表头
-                                        {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
-                                        , {field: 'userName', title: '用户名', width: 240}
-                                        , {field: 'password', title: '密码', width: 240}
-                                        , {field: 'userType', title: '帐号类型', width: 240}
-                                        , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 240}
-                                    ]]
-                                });
-                            },
-                        })
+                        if (data1.username == '') {
+                            layer.confirm("用户名不能为空！")
+                        } else if (data1.password == '') {
+                            layer.confirm("密码不能为空！")
+                        } else if (data1.type == '') {
+                            layer.confirm("用户类型不能为空！")
+                        } else {
+                            var postdata = {"userName": data1.username, "passWord": data1.password, "type": data1.type}
+                            $.ajax({
+                                url: '/adminUser/addOne',
+                                type: 'post',
+                                contentType: "application/json",
+                                data: JSON.stringify(postdata),
+                                success: function (data) {
+                                    table.render({
+                                        elem: '#alluserTable'
+                                        , height: 600
+                                        , url: '/adminUser/all' //数据接口
+                                        , toolbar: '#toolbarDemo'
+                                        , page: true //开启分页
+                                        , cols: [[ //表头
+                                            {field: 'id', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                                            , {field: 'userName', title: '用户名', width: 240}
+                                            , {field: 'password', title: '密码', width: 240}
+                                            , {field: 'userType', title: '帐号类型', width: 240}
+                                            , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 240}
+                                        ]]
+                                    });
+                                },
+                            })
+                            //data是默认值
+                            layer.closeAll();
+                        }
 
-                        //data是默认值
-                        layer.closeAll();
 
                     }
                 });

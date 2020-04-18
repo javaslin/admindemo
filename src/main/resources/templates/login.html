@@ -17,6 +17,47 @@
 <div class="video_mask">
     <img src="common/drug.jpeg">
 </div>
+<div class="site-text" style="margin: 5%; display: none" id="window2">
+    <form class="layui-form" id="addpatient" lay-filter="addpatient">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" id="patientName" name="patientName" autocomplete="off" placeholder="请输入用户名   "
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" id="password" name="password" autocomplete="off" placeholder="请输入用户名   "
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">真实姓名</label>
+            <div class="layui-input-block">
+                <input type="text" id="anoName" name="anoName" autocomplete="off" placeholder="请输入真实姓名"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-block">
+                <input type="text" id="age" name="age" autocomplete="off" placeholder="请输入年龄"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="text" id="gender" name="gender" autocomplete="off" placeholder="请输入性别"
+                       class="layui-input">
+            </div>
+            <br> <br>
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <input type="text" id="ptype" name="ptype" autocomplete="off" placeholder="请输入患者的类型"
+                       class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
 <div class="login">
     <h1>医药管理系统</h1>
     <form class="layui-form">
@@ -39,15 +80,78 @@
                 </select>
             </div>
         </div>
-        <button class="layui-btn" lay-submit lay-filter="loginS" type="button">登录</button>
+        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="loginS" type="button">登录</button>
+        <div>
+            <br>
+        </div>
+        <button class="layui-btn layui-btn-fluid" onclick="addpa()" lay-filter="addPat" type="button">注册病患</button>
     </form>
 </div>
 <script src="layui.js"></script>
 <script>
-    layui.use(['form', 'jquery'], function () {
+    function addpa() {
+        layui.use(['form', 'jquery', 'layer'], function () {
+
+            var $ = layui.jquery
+            var form = layui.form;
+            layer.open({
+                type: 1
+                , content: $("#window2")
+                , btn: '确定'
+                , btnAlign: 'c' //按钮居中
+                , area: ['500px', '500px']
+                , shade: 0 //不显示遮罩
+                , yes: function () {
+                    var data1 = form.val("addpatient");
+                    if (data1.patientName == '') {
+                        layer.confirm("用户名不能为空！")
+                    } else if (data1.password == '') {
+                        layer.confirm("密码不能为空！")
+                    } else if (data1.ptype == '') {
+                        layer.confirm("用户类型不能为空！")
+                    } else if (data1.anoName == '') {
+                        layer.confirm("真实姓名不能为空！")
+                    } else {
+                        var postdata = {
+                            "patientName": data1.patientName,
+                            "anoName": data1.anoName,
+                            "gender": data1.gender,
+                            "age": data1.age,
+                            "password": data1.password,
+                            "ptype": data1.ptype
+                        }
+                        $.ajax({
+                            url: '/patient/add',
+                            type: 'post',
+                            contentType: "application/json",
+                            data: JSON.stringify(postdata),
+                            success: function (data) {
+                                if (data.data == -1) {
+                                    layer.confirm("用户名已存在！")
+                                } else {
+                                    layer.confirm("注册成功！", function () {
+                                        //data是默认值
+                                        layer.closeAll();
+                                    })
+                                }
+
+
+                            },
+
+                        })
+                    }
+
+
+                }
+            });
+        });
+    }
+
+    layui.use(['form', 'jquery', 'layer'], function () {
         var $ = layui.jquery
         var form = layui.form;
         //监听提交
+
         form.on('submit(loginS)', function (data1) {
             $.ajax({
                 type: "POST",
